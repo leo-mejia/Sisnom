@@ -9,10 +9,9 @@
 <body>
   <div class="modal-container">
     <div class="modal-card">
-      <!-- Icono de alerta -->
       <div class="icono alerta"></div>
 
-      <!-- Mensaje principal -->
+
       <h2>Usuario No Encontrado</h2>
       <p class="mensaje">
         El correo electrónico ingresado no está registrado en el sistema Sisnom.
@@ -22,7 +21,6 @@
         o contacte al administrador del sistema para obtener acceso.
       </p>
 
-      <!-- Caja de ayuda -->
       <div class="ayuda">
         <strong>¿Necesita ayuda?</strong>
         <p>
@@ -31,13 +29,12 @@
         </p>
       </div>
 
-      <!-- Botones -->
+
       <div class="acciones">
         <button class="btn btn-negro">Intentar Nuevamente</button>
         <button class="btn btn-blanco">Contactar Soporte</button>
       </div>
 
-      <!-- Footer -->
       <footer>
         <p>Sistema de Nómina Sisnom - Error de Autenticación</p>
       </footer>
