@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>SISNOM - Registro de Empleado</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link rel="stylesheet" href="registro.css">
+</head>
+<body>
+    <header>
+        <h1>SISNOM - Sistema de Nómina</h1>
+    </header>
+    
+    <nav>
+        <a href="#">Inicio</a>
+        <a href="#">Empleados</a>
+        <a href="#">Nómina</a>
+        <a href="#">Informes</a>
+        <a href="#">Configuración</a>
+    </nav>
+
+    <div class="flex items-center justify-center min-h-screen p-4 sm:p-6 lg:p-8 bg-white">
+        <div class="w-full max-w-4xl mx-auto">
+            <!-- Encabezado del formulario -->
+            <header class="mb-8">
+                <div class="flex items-center space-x-4 mb-2">
+                    <button class="text-gray-600 hover:text-gray-800 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
+                            <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path>
+                        </svg>
+                    </button>
+                    <h1 class="text-2xl sm:text-3xl font-bold text-gray-800">Registro de Empleado</h1>
+                </div>
+                <p class="text-gray-600">Complete la información del nuevo empleado</p>
+            </header>
+
+            <!-- Formulario principal -->
+            <main>
+                <form action="#" method="POST">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6 mb-8">
+                        <!-- Nombres -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-800 mb-1.5" for="nombres">Nombres *</label>
+                            <input class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent" 
+                                   id="nombres" name="nombres" placeholder="Ingrese los nombres" type="text"/>
+                        </div>
+
+                        <!-- Apellidos -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-800 mb-1.5" for="apellidos">Apellidos *</label>
+                            <input class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent" 
+                                   id="apellidos" name="apellidos" placeholder="Ingrese los apellidos" type="text"/>
+                        </div>
+
+                        <!-- Cédula -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-800 mb-1.5" for="cedula">Cédula *</label>
+                            <input class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent" 
+                                   id="cedula" name="cedula" placeholder="Número de cédula" type="text"/>
+                        </div>
+
+                        <!-- Fecha de Nacimiento -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-800 mb-1.5" for="fecha-nacimiento">Fecha de Nacimiento *</label>
+                            <input class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent" 
+                                   id="fecha-nacimiento" name="fecha-nacimiento" placeholder="dd/mm/aaaa" type="text"/>
+                        </div>
+
+                        <!-- Cargo -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-800 mb-1.5" for="cargo">Cargo *</label>
+                            <select class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent" 
+                                    id="cargo" name="cargo">
+                                <option>Seleccione un cargo</option>
+                                <option>Desarrollador</option>
+                                <option>Diseñador</option>
+                                <option>Gerente de Proyecto</option>
+                                <option>Analista</option>
+                                <option>Asistente Administrativo</option>
+                            </select>
+                        </div>
+
+                        <!-- Salario -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-800 mb-1.5" for="salario">Salario Mensual (COP) *</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">$</span>
+                                <input class="w-full pl-7 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent" 
+                                       id="salario" name="salario" type="number" value="0"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Información importante -->
+                    <div class="bg-gray-50 border border-gray-200 rounded p-6 mb-8">
+                        <h3 class="text-md font-semibold text-gray-800 mb-3">Información importante:</h3>
+                        <ul class="space-y-2 text-sm text-gray-700 list-disc list-inside">
+                            <li>Todos los campos marcados con (*) son obligatorios</li>
+                            <li>La cédula debe ser única en el sistema</li>
+                            <li>El empleado debe ser mayor de 18 años</li>
+                            <li>El salario mínimo permitido es $100,000 COP</li>
+                        </ul>
+                    </div>
+
+                    <!-- Botón de envío -->
+                    <button class="w-full bg-black text-white font-semibold py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-black" 
+                            type="submit">
+                        Guardar Empleado
+                    </button>
+                </form>
+            </main>
+
+            <!-- Pie de página -->
+            <footer class="text-center mt-12">
+                <p class="text-sm text-gray-500">Sistema de Nómina SISNOM - Gestión de Empleados</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
