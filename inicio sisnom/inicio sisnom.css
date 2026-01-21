@@ -23,6 +23,7 @@ body {
 
 main {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: calc(100vh - 120px);
@@ -89,14 +90,19 @@ button {
 button:hover {
     background: #0a0a0a;
 }
-.ejemplos{
-    border-radius: 110 px solid #000;
+.e{
+    width: auto;
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid #000;
     border-color: #0a0a0a;
     background-color: aqua;
+    display: flex;
     text-align: center;
     color: #333;
     width: 300px;
     align-items: center;
+    justify-content: center;
 }
 
 .administrador_ayuda {
@@ -120,7 +126,7 @@ button:hover {
         font-size: 1.2em;
     }
     
-    .ejemplos {
+    .e {
         width: 100%;
     }
 }
