@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (submitButton) {
     submitButton.addEventListener('click', (e) => {
       e.preventDefault();
-      // Validación básica
       const inputs = document.querySelectorAll('.form-input');
       let filled = true;
       inputs.forEach(input => {
@@ -17,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       alert('Solicitud de vacaciones enviada con éxito.');
-      // Aquí normalmente enviarías los datos a un backend
     });
   }
 });
