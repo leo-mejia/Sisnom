@@ -1,3 +1,7 @@
+body {
+    font-family: Inter, "Noto Sans", sans-serif;
+}
+
 /* Layout General */
 .main-container {
     display: flex;
@@ -129,4 +133,99 @@ h2 { font-size: 1.125rem; font-weight: 700; margin-bottom: 1rem; }
     border-top: 1px solid #e5e7eb;
     font-size: 0.875rem;
     color: #4b5563;
+}
+
+/* Calendarios */
+.calendars-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.calendar-card {
+    min-width: 18rem;
+    max-width: 24rem;
+    background-color: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.calendar-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.calendar-nav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-nav-btn:hover {
+    background-color: #f3f4f6;
+}
+
+.calendar-spacer {
+    width: 2.5rem;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.25rem;
+}
+
+.calendar-day-header {
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: 700;
+    padding: 0.5rem 0;
+}
+
+.calendar-day {
+    text-align: center;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+}
+
+.day-gray {
+    background-color: #f3f4f6;
+}
+
+.day-active {
+    background-color: #000;
+    color: #fff;
+    border-radius: 0.25rem; /* Default radius */
+}
+
+.day-rounded-left {
+    border-top-left-radius: 9999px;
+    border-bottom-left-radius: 9999px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.day-rounded-right {
+    border-top-right-radius: 9999px;
+    border-bottom-right-radius: 9999px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }

@@ -1,29 +1,16 @@
-// Funcionalidad básica de recuperación de contraseña
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.querySelector('form');
-  const emailInput = document.getElementById('email');
-  const submitButton = document.getElementById('submit-btn');
+function handleRecovery(event) {
+            event.preventDefault();
+            const emailInput = document.getElementById('email');
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+            const form = document.getElementById('recoveryForm');
 
-  // Opcional: manejar clic en "Volver"
-  const backButton = document.querySelector('.back-button');
-  if (backButton) {
-    backButton.addEventListener('click', () => {
-      window.history.back();
-    });
-  }
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span>Enviando...</span>';
 
-  // Opcional: manejar envío del formulario
-  if (submitButton) {
-    submitButton.addEventListener('click', (e) => {
-      e.preventDefault();
-      const email = emailInput.value.trim();
-      if (!email || !email.includes('@')) {
-        alert('Por favor ingresa un correo electrónico válido.');
-        return;
-      }
-      // Aquí iría la lógica de envío (fetch, etc.)
-      alert(`Se enviará un enlace de recuperación a: ${email}`);
-      // Ejemplo: fetch('/api/reset-password', { method: 'POST', body: JSON.stringify({ email }) })
-    });
-  }
-});
+            setTimeout(() => {
+                form.style.display = 'none';
+                successMessage.style.display = 'block';
+                console.log('Correo enviado a:', emailInput.value);
+            }, 1500);
+        }
