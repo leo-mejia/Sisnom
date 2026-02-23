@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SISNOM - Sistema de Nómina</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="stylesheet" href="nomina empleado.css">
+</head>
+<body>
+    <div class="relative flex h-auto min-h-screen w-full bg-white overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
+        <div class="layout-container flex h-full grow">
+            <div class="w-64 bg-gray-50 border-r border-gray-200 p-4">
+                <div class="mb-8">
+                    <h2 class="text-lg font-semibold text-gray-800">Empresa ABC</h2>
+                </div>
+                
+                <div class="space-y-2">
+                    <a href="#" class="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-200 rounded-md">
+                        <div class="text-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                                <path d="M218.83,103.77l-80-75.48a1.14,1.14,0,0,1-.11-.11,16,16,0,0,0-21.53,0l-.11.11L37.17,103.77A16,16,0,0,0,32,115.55V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V160h32v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V115.55A16,16,0,0,0,218.83,103.77ZM208,208H160V160a16,16,0,0,0-16-16H112a16,16,0,0,0-16,16v48H48V115.55l.11-.1L128,40l79.9,75.43.11.1Z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-sm font-medium">Inicio</span>
+                    </a>
+                    
+                    <a href="#" class="flex items-center gap-3 px-3 py-2 bg-gray-200 text-gray-800 rounded-md">
+                        <div class="text-gray-800">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                                <path d="M116,80h4v40h-4a20,20,0,0,1,0-40Zm32,56H136v40h12a20,20,0,0,0,0-40Zm84-8A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-48,28a36,36,0,0,0-36-36H136V80h4a20,20,0,0,1,20,20,8,8,0,0,0,16,0,36,36,0,0,0-36-36h-4V56a8,8,0,0,0-16,0v8h-4a36,36,0,0,0,0,72h4v40h-8a20,20,0,0,1-20-20,8,8,0,0,0-16,0,36,36,0,0,0,36,36h8v8a8,8,0,0,0,16,0v-8h12A36,36,0,0,0,184,156Z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-sm font-medium">Nómina</span>
+                    </a>
+                    
+                    <a href="#" class="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-200 rounded-md">
+                        <div class="text-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                                <path d="M216,56H176V48a24,24,0,0,0-24-24H104A24,24,0,0,0,80,48v8H40A16,16,0,0,0,24,72V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V72A16,16,0,0,0,216,56ZM96,48a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96ZM216,72v41.61A184,184,0,0,1,128,136a184.07,184.07,0,0,1-88-22.38V72Zm0,128H40V131.64A200.19,200.19,0,0,0,128,152a200.25,200.25,0,0,0,88-20.37V200ZM104,112a8,8,0,0,1,8-8h32a8,8,0,0,1,0,16H112A8,8,0,0,1,104,112Z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-sm font-medium">Beneficios</span>
+                    </a>
+                    
+                    <a href="#" class="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-200 rounded-md">
+                        <div class="text-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                                <path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Zm-96-88v64a8,8,0,0,1-16,0V132.94l-4.42,2.22a8,8,0,0,1-7.16-14.32l16-8A8,8,0,0,1,112,120Zm59.16,30.45L152,176h16a8,8,0,0,1,0,16H136a8,8,0,0,1-6.4-12.8l28.78-38.37A8,8,0,1,0,145.07,132a8,8,0,1,1-13.85-8A24,24,0,0,1,176,136,23.76,23.76,0,0,1,171.16,150.45Z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-sm font-medium">Tiempo libre</span>
+                    </a>
+                    
+                    <a href="#" class="flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-200 rounded-md">
+                        <div class="text-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                                <path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-sm font-medium">Perfil</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="flex-1 p-6">
+                <div class="mb-6">
+                    <h1 class="text-2xl font-bold text-gray-800">Nómina</h1>
+                </div>
+                
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Desprendibles de pago</h2>
+                    
+                    <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="bg-gray-50">
+                                    <th class="px-4 py-3 text-left text-sm font-medium text-gray-800">Fecha de pago</th>
+                                    <th class="px-4 py-3 text-left text-sm font-medium text-gray-800">Período</th>
+                                    <th class="px-4 py-3 text-left text-sm font-medium text-gray-800">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-gray-200">
+                                    <td class="px-4 py-3 text-sm text-gray-600">15 de mayo de 2024</td>
+                                    <td class="px-4 py-3 text-sm text-gray-600">1 de mayo - 15 de mayo</td>
+                                    <td class="px-4 py-3">
+                                        <button class="text-blue-600 hover:text-blue-800 text-sm font-semibold">
+                                            Ver desprendible
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="border-t border-gray-200">
+                                    <td class="px-4 py-3 text-sm text-gray-600">30 de abril de 2024</td>
+                                    <td class="px-4 py-3 text-sm text-gray-600">16 de abril - 30 de abril</td>
+                                    <td class="px-4 py-3">
+                                        <button class="text-blue-600 hover:text-blue-800 text-sm font-semibold">
+                                            Ver desprendible
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="border-t border-gray-200">
+                                    <td class="px-4 py-3 text-sm text-gray-600">15 de abril de 2024</td>
+                                    <td class="px-4 py-3 text-sm text-gray-600">1 de abril - 15 de abril</td>
+                                    <td class="px-4 py-3">
+                                        <button class="text-blue-600 hover:text-blue-800 text-sm font-semibold">
+                                            Ver desprendible
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="border-t border-gray-200">
+                                    <td class="px-4 py-3 text-sm text-gray-600">31 de marzo de 2024</td>
+                                    <td class="px-4 py-3 text-sm text-gray-600">16 de marzo - 31 de marzo</td>
+                                    <td class="px-4 py-3">
+                                        <button class="text-blue-600 hover:text-blue-800 text-sm font-semibold">
+                                            Ver desprendible
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="border-t border-gray-200">
+                                    <td class="px-4 py-3 text-sm text-gray-600">15 de marzo de 2024</td>
+                                    <td class="px-4 py-3 text-sm text-gray-600">1 de marzo - 15 de marzo</td>
+                                    <td class="px-4 py-3">
+                                        <button class="text-blue-600 hover:text-blue-800 text-sm font-semibold">
+                                            Ver desprendible
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Historial de pagos</h2>
+                    
+                    <div class="mb-4">
+                        <div class="max-w-md">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Filtrar por período</label>
+                            <select class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">Todos los períodos</option>
+                                <option value="2024-05">Mayo 2024</option>
+                                <option value="2024-04">Abril 2024</option>
+                                <option value="2024-03">Marzo 2024</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="bg-gray-50">
+                                    <th class="px-4 py-3 text-left text-sm font-medium text-gray-800">Fecha de pago</th>
+                                    <th class="px-4 py-3 text-left text-sm font-medium text-gray-800">Período</th>
+                                    <th class="px-4 py-3 text-left text-sm font-medium text-gray-800">Monto</th>
+                                    <th class="px-4 py-3 text-left text-sm font-medium text-gray-800">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-gray-200">
+                                    <td class="px-4 py-3 text-sm text-gray-600">15 de mayo de 2024</td>
+                                    <td class="px-4 py-3 text-sm text-gray-600">1 de mayo - 15 de mayo</td>
+                                    <td class="px-4 py-3 text-sm text-gray-600">$2,500</td>
+                                    <td class="px-4 py-3">
+                                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">
+                                            Pagado
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="border-t border-gray-200">
+                                    <td class="px-4 py-3 text-sm text-gray-600">30 de abril de 2024</td>
+                                    <td class="px-4 py-3 text-sm text-gray-600">16 de abril - 30 de abril</td>
+                                    <td class="px-4 py-3 text-sm text-gray-600">$2,500</td>
+                                    <td class="px-4 py-3">
+                                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">
+                                            Pagado
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="border-t border-gray-200">
+                                    <td class="px-4 py-3 text-sm text-gray-600">15 de abril de 2024</td>
+                                    <td class="px-4 py-3 text-sm text-gray-600">1 de abril - 15 de abril</td>
+                                    <td class="px-4 py-3 text-sm text-gray-600">$2,500</td>
+                                    <td class="px-4 py-3">
+                                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">
+                                            Pagado
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="border-t border-gray-200">
+                                    <td class="px-4 py-3 text-sm text-gray-600">31 de marzo de 2024</td>
+                                    <td class="px-4 py-3 text-sm text-gray-600">16 de marzo - 31 de marzo</td>
+                                    <td class="px-4 py-3 text-sm text-gray-600">$2,500</td>
+                                    <td class="px-4 py-3">
+                                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">
+                                            Pagado
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="border-t border-gray-200">
+                                    <td class="px-4 py-3 text-sm text-gray-600">15 de marzo de 2024</td>
+                                    <td class="px-4 py-3 text-sm text-gray-600">1 de marzo - 15 de marzo</td>
+                                    <td class="px-4 py-3 text-sm text-gray-600">$2,500</td>
+                                    <td class="px-4 py-3">
+                                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">
+                                            Pagado
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

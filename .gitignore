@@ -1,0 +1,25 @@
+# Archivos de compilación de Maven
+target/
+*.log
+
+# Archivos de IDEs (Eclipse, VS Code, IntelliJ, NetBeans)
+.settings/
+.project
+.classpath
+.factorypath
+.vscode/
+.idea/
+*.iml
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+bin/
+
+# Archivos compilados o empaquetados fuera de target
+*.war
+
+# Basura del sistema operativo
+.DS_Store
+Thumbs.db

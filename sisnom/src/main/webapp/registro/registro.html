@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SISNOM - Registro de Empleado</title>
+    <link rel="stylesheet" href="./registro.css">
+
+</head>
+<body>
+    <div class="main-layout">
+        <div class="card-container">
+            <div class="auth-card">
+                <header class="header-section">
+                    <a href="../index.jsp" class="btn-back">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                    </a>
+                    <div class="title-group">
+                        <h1>Registro de Empleado</h1>
+                        <p>Complete los campos para el registro en SISNOM</p>
+                    </div>
+                </header>
+
+                <form id="registroForm" action="../registrar" method="POST">
+                    <div class="form-grid">
+
+                        <div class="section-divider">Configuración de Usuario</div>
+
+
+                        <div class="form-group">
+                            <label class="form-label">Rol en Sistema *</label>
+                            <select name="rol" class="form-select" required>
+                                <option value="empleado">Empleado</option>
+                                <option value="admin">Administrador</option>
+                                <option value="contador">Contador</option>
+                                <option value="recursos_humanos">Recursos Humanos</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Contraseña *</label>
+                            <input type="password" id="password" name="password" class="form-input" placeholder="••••••••" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Confirmar Contraseña *</label>
+                            <input type="password" id="confirm_password" name="confirm_password" class="form-input" placeholder="••••••••" required>
+                            <span id="passwordError" class="error-text" style="display:none; color:red;">Las contraseñas no coinciden</span>
+                        </div>
+
+                        <div class="section-divider">Identificación</div>
+
+                        <div class="form-group">
+                            <label class="form-label">Nombres *</label>
+                            <input type="text" name="nombres" class="form-input" placeholder="Nombres completos" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Apellidos *</label>
+                            <input type="text" name="apellidos" class="form-input" placeholder="Apellidos completos" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Tipo de Documento *</label>
+                            <select name="tipo_doc" class="form-select" required>
+                                <option value="CC">Cédula de Ciudadanía</option>
+                                <option value="CE">Cédula de Extranjería</option>
+                                <option value="TI">Tarjeta de Identidad</option>
+                                <option value="PAP">Pasaporte</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Número de Documento *</label>
+                            <input type="text" name="numero_doc" class="form-input" placeholder="Sin puntos ni comas" required>
+                        </div>
+
+                        <div class="section-divider">Información de Contacto</div>
+
+                        <div class="form-group">
+                            <label class="form-label">Email Corporativo / Personal</label>
+                            <input type="email" name="email" class="form-input" placeholder="correo@ejemplo.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Teléfono / Celular</label>
+                            <input type="tel" name="telefono" class="form-input" placeholder="Ej. 3101234567">
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label class="form-label">Dirección de Residencia</label>
+                            <input type="text" name="direccion" class="form-input" placeholder="Calle, Carrera, Ciudad, Barrio">
+                        </div>
+
+                        <div class="section-divider">Datos de Empresa</div>
+
+                        <div class="form-group">
+                            <label class="form-label">Cargo Asignado</label>
+                            <select name="cargo" class="form-select">
+                                <option value="" disabled selected>Seleccione un cargo...</option>
+                                <option value="analista_nomina">Analista de Nómina</option>
+                                <option value="auxiliar_contable">Auxiliar Contable</option>
+                                <option value="gerente_rh">Gerente de Recursos Humanos</option>
+                                <option value="desarrollador">Desarrollador de Sistemas</option>
+                                <option value="contador_general">Contador General</option>
+                                <option value="secretaria">Secretario/a Ejecutivo/a</option>
+                            </select>
+                        </div>
+                           <div class="form-group">
+                            <label class="form-label">Fecha de Inicio (Ingreso)</label>
+                            <input type="date" id="fecha_inicio" name="fecha_inicio" class="form-input" readonly>
+                        </div>
+                        <script>
+                            document.getElementById('fecha_inicio').valueAsDate = new Date();
+                        </script>
+
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="index.jsp" class="btn-discard">Descartar</a>
+                        <button type="submit" class="btn-save">Finalizar Registro</button>
+                    </div>
+                </form>
+            </div>
+            <p class="footer-text">SISNOM &copy; 2026 - Módulo de Registro</p>
+        </div>
+    </div>
+  <script src="registro/registro.js"></script>
+</body>
+</html>

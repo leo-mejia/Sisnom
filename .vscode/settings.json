@@ -1,7 +1,13 @@
 {
-
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "c:\\Users\\User\\Downloads\\mysql-connector-j-9.6.0\\mysql-connector-j-9.6.0\\mysql-connector-j-9.6.0.jar"
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.compile.nullAnalysis.mode": "automatic",
+    "maven.terminal.useJavaHome": true,
+    "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+    "java.configuration.runtime": [
+        {
+            "name": "JavaSE-25",
+            "path": "RUTA_AL_JDK_AQUI",
+            "default": true
+        }
     ]
 }

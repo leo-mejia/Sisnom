@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SISNOM - Sistema de Nómina</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+    <link rel="stylesheet" href="solicitudes empleado.css">
+</head>
+<body>
+
+
+    <div class="main-container">
+            <aside class="sidebar">
+                <div class="user-profile-summary">
+                        <div
+                            id="user-avatar"
+                            class="avatar"
+                        ></div>
+                        <div class="user-info">
+                            <h2>Elena Ramirez</h2>
+                        </div>
+                </div>
+                
+                <nav class="sidebar-nav">
+                    <a href="#" class="nav-item">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                                <path d="M218.83,103.77l-80-75.48a1.14,1.14,0,0,1-.11-.11,16,16,0,0,0-21.53,0l-.11.11L37.17,103.77A16,16,0,0,0,32,115.55V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V160h32v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V115.55A16,16,0,0,0,218.83,103.77ZM208,208H160V160a16,16,0,0,0-16-16H112a16,16,0,0,0-16,16v48H48V115.55l.11-.1L128,40l79.9,75.43.11.1Z"></path>
+                            </svg>
+                        </div>
+                        <span>Inicio</span>
+                    </a>
+                    
+                    <a href="#" class="nav-item">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                                <path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"></path>
+                            </svg>
+                        </div>
+                        <span>Mi Perfil</span>
+                    </a>
+                    
+                    <a href="#" class="nav-item">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                                <path d="M152,120H136V56h8a32,32,0,0,1,32,32,8,8,0,0,0,16,0,48.05,48.05,0,0,0-48-48h-8V24a8,8,0,0,0-16,0V40h-8a48,48,0,0,0,0,96h8v64H104a32,32,0,0,1-32-32,8,8,0,0,0-16,0,48.05,48.05,0,0,0,48,48h16v16a8,8,0,0,0,16,0V216h16a48,48,0,0,0,0-96Zm-40,0a32,32,0,0,1,0-64h8v64Zm40,80H136V136h16a32,32,0,0,1,0,64Z"></path>
+                            </svg>
+                        </div>
+                        <span>Nómina</span>
+                    </a>
+                    
+                    <a href="#" class="nav-item active">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                                <path d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM152,88V44l44,44Z"></path>
+                            </svg>
+                        </div>
+                        <span>Solicitudes</span>
+                    </a>
+                    
+                    <a href="#" class="nav-item">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                                <path d="M216,72H131.31L104,44.69A15.86,15.86,0,0,0,92.69,40H40A16,16,0,0,0,24,56V200.62A15.4,15.4,0,0,0,39.38,216H216.89A15.13,15.13,0,0,0,232,200.89V88A16,16,0,0,0,216,72ZM40,56H92.69l16,16H40ZM216,200H40V88H216Z"></path>
+                            </svg>
+                        </div>
+                        <span>Documentos</span>
+                    </a>
+                </nav>
+            </aside>
+            
+            <main class="content">
+                <div class="mb-6">
+                    <h1 class="page-title">Solicitudes</h1>
+                </div>
+                
+                <div class="tabs-container">
+                    <div class="tabs-list">
+                        <a href="#" class="tab-link active">
+                            Vacaciones
+                        </a>
+                        <a href="#" class="tab-link">
+                            Permisos
+                        </a>
+                        <a href="#" class="tab-link">
+                            Incapacidades
+                        </a>
+                        <a href="#" class="tab-link">
+                            Ausencias
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2 class="section-title">Solicitar Vacaciones</h2>
+                    
+                    <div class="form-grid">
+                        <div>
+                            <label class="form-label">Fecha de inicio</label>
+                            <input type="text" class="form-input" placeholder="Seleccionar fecha">
+                        </div>
+                        
+                        <div>
+                            <label class="form-label">Fecha de fin</label>
+                            <input type="text" class="form-input" placeholder="Seleccionar fecha">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Motivo (opcional)</label>
+                        <textarea class="form-textarea" placeholder="Escribe el motivo de tu solicitud"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button class="btn-primary">
+                            Enviar Solicitud
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="mb-8">
+                    <h2 class="section-title">Solicitudes Pendientes</h2>
+                    
+                    <div class="table-container">
+                        <table class="custom-table">
+                            <thead>
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Fecha de inicio</th>
+                                    <th>Fecha de fin</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-dark">Vacaciones</td>
+                                    <td>2024-07-15</td>
+                                    <td>2024-07-20</td>
+                                    <td>
+                                        <span class="badge badge-yellow">
+                                            Pendiente
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-dark">Permiso</td>
+                                    <td>2024-08-05</td>
+                                    <td>2024-08-05</td>
+                                    <td>
+                                        <span class="badge badge-green">
+                                            Aprobado
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-dark">Incapacidad</td>
+                                    <td>2024-09-10</td>
+                                    <td>2024-09-15</td>
+                                    <td>
+                                        <span class="badge badge-red">
+                                            Rechazado
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="mb-8">
+                    <h2 class="section-title">Solicitudes Aprobadas</h2>
+                    
+                    <div class="table-container">
+                        <table class="custom-table">
+                            <thead>
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Fecha de inicio</th>
+                                    <th>Fecha de fin</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-dark">Vacaciones</td>
+                                    <td>2024-01-10</td>
+                                    <td>2024-01-15</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-dark">Permiso</td>
+                                    <td>2024-02-20</td>
+                                    <td>2024-02-20</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+    </div>
+</body>
+</html>
