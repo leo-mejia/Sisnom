@@ -15,11 +15,11 @@ Crear una aplicación web funcional e intuitiva para administrar el registro de 
 ## 📋 Requisitos Técnicos
 
 Para que el proyecto funcione correctamente, el entorno debe cumplir con:
-*   **Java:** JDK 17 LTS (o superior).
-*   **Maven:** Versión 3.8 o superior.
-*   **Servidor:** Apache Tomcat 9.0 o superior.
+*   **Java:** JDK 17
+*   **Maven:** Versión 3.8
+*   **Servidor:** Apache Tomcat 9.0
 *   **Base de Datos:** Un servidor de MySQL.
-*   **IDE Recomendado:** VS Code con el "Extension Pack for Java" 
+*   **IDE Recomendado:** VS Code con el "Extension Pack for Java"
 
 ## 🚀 Configuración del Entorno
 

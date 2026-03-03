@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SISNOM - Iniciar Sesión</title>
-    <link rel="stylesheet" href="inicio_sisnom/iniciosisnom.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/iniciosisnom.css">
 </head>
 <body>
     <div class="main-layout">
