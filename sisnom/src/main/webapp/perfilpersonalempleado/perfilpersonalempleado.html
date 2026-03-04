@@ -96,53 +96,192 @@
                     <p class="text-gray-600">Aquí puedes ver y actualizar tu información personal.</p>
                 </div>
                 
-                <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-4">Información Personal</h2>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Nombre</label>
-                            <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ingresa tu nombre">
-                        </div>
+                <form id="formPerfil" class="space-y-6">
+                    <div class="bg-white border border-gray-200 rounded-lg p-6">
+                        <h2 class="text-xl font-bold text-gray-800 mb-4">Información Personal</h2>
                         
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Dirección</label>
-                            <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ingresa tu dirección">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Información de Contacto</label>
-                            <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Teléfono o email">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Nombre Completo</label>
+                                <input type="text" id="nombre" name="nombre" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Tu nombre completo" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Correo Electrónico</label>
+                                <input type="email" id="correo" name="correo" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Tu correo electrónico" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Teléfono</label>
+                                <input type="tel" id="telefono" name="telefono" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Tu número de teléfono">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Dirección</label>
+                                <input type="text" id="direccion" name="direccion" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Tu dirección">
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6">
-                    <h2 class="text-xl font-bold text-gray-800 mb-4">Detalles de Empleo</h2>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Cargo</label>
-                            <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Tu cargo actual">
-                        </div>
+                    <div class="bg-white border border-gray-200 rounded-lg p-6">
+                        <h2 class="text-xl font-bold text-gray-800 mb-4">Detalles de Empleo</h2>
                         
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Departamento</label>
-                            <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Departamento">
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Fecha de Inicio</label>
-                            <input type="text" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Fecha de inicio">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Cargo</label>
+                                <input type="text" id="cargo" name="cargo" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Tu cargo actual" readonly>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Departamento</label>
+                                <input type="text" id="departamento" name="departamento" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Departamento" readonly>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Fecha de Inicio</label>
+                                <input type="text" id="fechaInicio" name="fechaInicio" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Fecha de inicio" readonly>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">ID Empleado</label>
+                                <input type="text" id="idEmpleado" name="idEmpleado" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="ID" readonly>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    
+                    <div id="mensajeAlert" class="hidden bg-blue-50 border border-blue-200 text-blue-800 px-4 py-3 rounded-md text-sm"></div>
+                    
+                    <div class="flex justify-end gap-3">
+                        <button type="button" id="btnEliminar" class="bg-red-600 text-white py-2 px-6 rounded-md text-sm font-semibold hover:bg-red-700 transition-colors">
+                            Eliminar Perfil
+                        </button>
+                        <button type="submit" id="btnGuardar" class="bg-black text-white py-2 px-6 rounded-md text-sm font-semibold hover:bg-gray-800 transition-colors">
+                            Guardar Cambios
+                        </button>
+                    </div>
+                </form>
                 
-                <div class="flex justify-end">
-                    <button class="bg-black text-white py-2 px-6 rounded-md text-sm font-semibold hover:bg-gray-800 transition-colors">
-                        Actualizar Perfil
-                    </button>
-                </div>
+                <script>
+                    // Cargar datos del perfil al iniciar
+                    document.addEventListener('DOMContentLoaded', function() {
+                        cargarPerfil();
+                    });
+                    
+                    function cargarPerfil() {
+                        fetch('/sisnom/perfil?action=obtener', {
+                            method: 'GET',
+                            credentials: 'include'
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                document.getElementById('nombre').value = data.nombre || '';
+                                document.getElementById('correo').value = data.correo || '';
+                                document.getElementById('telefono').value = data.telefono || '';
+                                document.getElementById('direccion').value = data.direccion || '';
+                                document.getElementById('cargo').value = data.cargo || '';
+                                document.getElementById('departamento').value = data.departamento || '';
+                                document.getElementById('fechaInicio').value = data.fechaInicio || '';
+                                document.getElementById('idEmpleado').value = data.idEmpleado || '';
+                            } else {
+                                mostrarMensaje('Error al cargar el perfil: ' + (data.mensaje || 'Intenta nuevamente'), 'error');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            mostrarMensaje('Error de conexión', 'error');
+                        });
+                    }
+                    
+                    // Actualizar perfil (UPDATE)
+                    document.getElementById('formPerfil').addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        
+                        const datos = {
+                            nombre: document.getElementById('nombre').value.trim(),
+                            correo: document.getElementById('correo').value.trim(),
+                            telefono: document.getElementById('telefono').value.trim(),
+                            direccion: document.getElementById('direccion').value.trim(),
+                            action: 'actualizar'
+                        };
+                        
+                        if (!datos.nombre || !datos.correo) {
+                            mostrarMensaje('Por favor completa los campos requeridos', 'error');
+                            return;
+                        }
+                        
+                        fetch('/sisnom/perfil', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            credentials: 'include',
+                            body: JSON.stringify(datos)
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                mostrarMensaje('Perfil actualizado correctamente ✓', 'success');
+                            } else {
+                                mostrarMensaje('Error: ' + (data.mensaje || 'No se pudo actualizar'), 'error');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            mostrarMensaje('Error de conexión', 'error');
+                        });
+                    });
+                    
+                    // Eliminar perfil (DELETE)
+                    document.getElementById('btnEliminar').addEventListener('click', function() {
+                        if (confirm('⚠️ ¿Estás seguro de que deseas eliminar tu perfil? Esta acción no se puede deshacer.')) {
+                            if (confirm('Esta es la última confirmación. ¿Deseas continuar?')) {
+                                fetch('/sisnom/perfil', {
+                                    method: 'DELETE',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    credentials: 'include',
+                                    body: JSON.stringify({ action: 'eliminar' })
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        mostrarMensaje('Perfil eliminado. Redirigiendo...', 'success');
+                                        setTimeout(() => {
+                                            window.location.href = '/sisnom/index.jsp';
+                                        }, 2000);
+                                    } else {
+                                        mostrarMensaje('Error: ' + (data.mensaje || 'No se pudo eliminar'), 'error');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    mostrarMensaje('Error de conexión', 'error');
+                                });
+                            }
+                        }
+                    });
+                    
+                    function mostrarMensaje(texto, tipo) {
+                        const alert = document.getElementById('mensajeAlert');
+                        alert.textContent = texto;
+                        alert.classList.remove('hidden', 'bg-blue-50', 'border-blue-200', 'text-blue-800', 'bg-red-50', 'border-red-200', 'text-red-800', 'bg-green-50', 'border-green-200', 'text-green-800');
+                        
+                        if (tipo === 'error') {
+                            alert.classList.add('bg-red-50', 'border-red-200', 'text-red-800');
+                        } else if (tipo === 'success') {
+                            alert.classList.add('bg-green-50', 'border-green-200', 'text-green-800');
+                        } else {
+                            alert.classList.add('bg-blue-50', 'border-blue-200', 'text-blue-800');
+                        }
+                        
+                        alert.scrollIntoView({ behavior: 'smooth' });
+                        setTimeout(() => {
+                            alert.classList.add('hidden');
+                        }, 5000);
+                    }
+                </script>
             </div>
         </div>
     </div>

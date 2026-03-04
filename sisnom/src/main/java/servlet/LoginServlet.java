@@ -61,7 +61,9 @@ public class LoginServlet extends HttpServlet {
             con = Conexion.getConnection();
             
 
-            String sql = "SELECT rol FROM usuario WHERE correo = ? AND contraseña = ?";
+            String sql = "SELECT u.rol, e.estado FROM usuario u " +
+                        "LEFT JOIN empleado e ON u.id_usuario = e.id_usuario " +
+                        "WHERE u.correo = ? AND u.contraseña = ?";
             ps = con.prepareStatement(sql);
             ps.setString(1, emailInput);
             ps.setString(2, passwordInput);
@@ -69,11 +71,27 @@ public class LoginServlet extends HttpServlet {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-
-                String rol = rs.getString("rol");
+                String rolStr = rs.getString("rol");
+                String estadoEmpleado = rs.getString("estado");
                 
-                if (rol != null) rol = rol.trim().toLowerCase();
-                System.out.println("LOGIN EXITOSO -> Rol detectado: [" + rol + "]");
+                if (rolStr == null) {
+                    System.out.println("❌ ERROR: rol es NULL en la BD");
+                    response.sendRedirect("index.jsp?error=db");
+                    return;
+                }
+                
+                String rol = rolStr.trim().toLowerCase();
+                
+                // Verificar si empleado está activo (solo para rol empleado)
+                if (rol.equals("empleado")) {
+                    if (estadoEmpleado == null || estadoEmpleado.equals("inactivo")) {
+                        System.out.println("❌ LOGIN BLOQUEADO -> Empleado inactivo o eliminado.");
+                        response.sendRedirect("index.jsp?error=empleado_inactivo");
+                        return;
+                    }
+                }
+                
+                System.out.println("✅ LOGIN EXITOSO -> Rol detectado: [" + rol + "]");
 
 
                 HttpSession session = request.getSession();

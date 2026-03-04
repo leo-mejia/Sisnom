@@ -15,10 +15,12 @@
                         <div
                             id="user-avatar"
                             class="avatar"
-                        ></div>
+                            style="display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; color: white; background-color: #9ca3af;">
+                            <span id="avatarInitial">SC</span>
+                        </div>
                         <div class="user-info">
-                            <h2>Sophia Clark</h2>
-                            <p>Empleado</p>
+                            <h2 id="userFullName">Cargando...</h2>
+                            <p id="userRole">Cargando...</p>
                         </div>
                     </div>
                 </div>
@@ -89,29 +91,97 @@
                     <h2>Perfil Personal</h2>
                     
                     <div class="card">
-                        <div class="profile-grid">
-                            <div class="profile-item">
-                                <p class="text-label">Nombre</p>
-                                <p class="text-value">Sophia Clark</p>
+                        <!-- Vista de Lectura -->
+                        <div id="vistaPerfil">
+                            <div class="profile-grid">
+                                <div class="profile-item">
+                                    <p class="text-label">Nombre</p>
+                                    <p class="text-value" id="nombreView">Sophia Clark</p>
+                                </div>
+                                <div class="profile-item">
+                                    <p class="text-label">Cargo</p>
+                                    <p class="text-value" id="cargoView">Analista de Marketing</p>
+                                </div>
+                                <div class="profile-item">
+                                    <p class="text-label">Departamento</p>
+                                    <p class="text-value" id="departamentoView">Marketing</p>
+                                </div>
+                                <div class="profile-item">
+                                    <p class="text-label">Fecha de Ingreso</p>
+                                    <p class="text-value" id="fechaView">15 de enero de 2022</p>
+                                </div>
                             </div>
-                            <div class="profile-item">
-                                <p class="text-label">Cargo</p>
-                                <p class="text-value">Analista de Marketing</p>
-                            </div>
-                            <div class="profile-item">
-                                <p class="text-label">Departamento</p>
-                                <p class="text-value">Marketing</p>
-                            </div>
-                            <div class="profile-item">
-                                <p class="text-label">Fecha de Ingreso</p>
-                                <p class="text-value">15 de enero de 2022</p>
+                            <div class="mt-6">
+                                <button class="btn btn-secondary" id="btnActualizar">
+                                    Actualizar Perfil
+                                </button>
                             </div>
                         </div>
-                        
-                        <div class="mt-6">
-                            <button class="btn btn-secondary">
-                                Actualizar Perfil
-                            </button>
+
+                        <!-- Formulario de Edición (Oculto) -->
+                        <div id="formEdicion" class="form-edicion" style="display: none;">
+                            <div class="profile-grid">
+                                <div class="profile-item">
+                                    <p class="text-label">Nombres</p>
+                                    <input type="text" id="nombresEdit" class="form-input" placeholder="Primeros nombres">
+                                </div>
+                                <div class="profile-item">
+                                    <p class="text-label">Apellidos</p>
+                                    <input type="text" id="apellidosEdit" class="form-input" placeholder="Apellidos">
+                                </div>
+                                <div class="profile-item">
+                                    <p class="text-label">Correo</p>
+                                    <input type="email" id="correoEdit" class="form-input" placeholder="correo@ejemplo.com">
+                                </div>
+                                <div class="profile-item">
+                                    <p class="text-label">Teléfono</p>
+                                    <input type="tel" id="telefonoEdit" class="form-input" placeholder="Teléfono">
+                                </div>
+                                <div class="profile-item">
+                                    <p class="text-label">Dirección</p>
+                                    <input type="text" id="direccionEdit" class="form-input" placeholder="Dirección">
+                                </div>
+                                <div class="profile-item">
+                                    <p class="text-label">Cargo</p>
+                                    <select id="cargoEdit" class="form-input">
+                                        <option value="">Seleccione un cargo...</option>
+                                        <option value="analista_nomina">Analista de Nómina</option>
+                                        <option value="auxiliar_contable">Auxiliar Contable</option>
+                                        <option value="gerente_rh">Gerente de Recursos Humanos</option>
+                                        <option value="desarrollador">Desarrollador de Sistemas</option>
+                                        <option value="contador_general">Contador General</option>
+                                        <option value="secretaria">Secretario/a Ejecutivo/a</option>
+                                        <option value="analista_marketing">Analista de Marketing</option>
+                                    </select>
+                                </div>
+                                <div class="profile-item">
+                                    <p class="text-label">Departamento</p>
+                                    <select id="departamentoEdit" class="form-input">
+                                        <option value="">Seleccione un departamento...</option>
+                                        <option value="Marketing">Marketing</option>
+                                        <option value="Tecnología">Tecnología</option>
+                                        <option value="Finanzas">Finanzas</option>
+                                        <option value="Recursos Humanos">Recursos Humanos</option>
+                                        <option value="Operaciones">Operaciones</option>
+                                        <option value="Contabilidad">Contabilidad</option>
+                                    </select>
+                                </div>
+                                <div class="profile-item">
+                                    <p class="text-label">Fecha de Ingreso</p>
+                                    <p class="text-value" id="fechaEdit">15 de enero de 2022</p>
+                                </div>
+                            </div>
+                            <div class="mt-6 btn-group">
+                                <button class="btn btn-secondary" id="btnGuardar">
+                                    Guardar Cambios
+                                </button>
+                                <button class="btn btn-cancel" id="btnCancelar">
+                                    Cancelar
+                                </button>
+                                <button class="btn btn-danger" id="btnEliminar">
+                                    Eliminar Perfil
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -687,6 +757,223 @@
                 }
             }
         }
+
+        // Funciones para editar perfil
+        function initializeProfile() {
+            fetch('/sisnom/perfil', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Actualizar avatar con iniciales
+                    const nombres = data.nombres || '';
+                    const apellidos = data.apellidos || '';
+                    const inicial1 = nombres.charAt(0).toUpperCase();
+                    const inicial2 = apellidos.charAt(0).toUpperCase();
+                    document.getElementById('avatarInitial').textContent = inicial1 + inicial2;
+                    
+                    // Actualizar nombre completo
+                    const nombreCompleto = (nombres + ' ' + apellidos).trim();
+                    document.getElementById('userFullName').textContent = nombreCompleto || 'Cargando...';
+                    
+                    // Actualizar rol en sidebar
+                    document.getElementById('userRole').textContent = data.rol || 'Empleado';
+                    
+                    // Actualizar datos visibles en la tarjeta del perfil
+                    document.getElementById('nombreView').textContent = nombreCompleto || 'Cargando...';
+                    document.getElementById('cargoView').textContent = data.cargo || 'No especificado';
+                    document.getElementById('departamentoView').textContent = data.departamento || 'No especificado';
+                    document.getElementById('fechaView').textContent = data.fechaInicio || 'No especificada';
+                } else {
+                    console.error('Error al cargar perfil:', data.mensaje);
+                }
+            })
+            .catch(error => {
+                console.error('Error al inicializar perfil:', error);
+            });
+        }
+
+        function loadProfileData() {
+            fetch('/sisnom/perfil', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Llenar el formulario con los datos obtenidos
+                    document.getElementById('nombresEdit').value = data.nombres || '';
+                    document.getElementById('apellidosEdit').value = data.apellidos || '';
+                    document.getElementById('correoEdit').value = data.correo || '';
+                    document.getElementById('cargoEdit').value = data.cargo || '';
+                    document.getElementById('departamentoEdit').value = data.departamento || '';
+                    document.getElementById('telefonoEdit').value = data.telefono || '';
+                    document.getElementById('direccionEdit').value = data.direccion || '';
+                    document.getElementById('fechaEdit').textContent = data.fechaInicio || '15 de enero de 2022';
+                } else {
+                    alert('Error al cargar los datos: ' + data.mensaje);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error de conexión al cargar los datos');
+            });
+        }
+
+        function toggleEditMode() {
+            const vistaPerfil = document.getElementById('vistaPerfil');
+            const formEdicion = document.getElementById('formEdicion');
+            
+            vistaPerfil.style.display = 'none';
+            formEdicion.style.display = 'block';
+            
+            // Cargar datos desde el servidor
+            loadProfileData();
+        }
+
+        function cancelarEdicion() {
+            const vistaPerfil = document.getElementById('vistaPerfil');
+            const formEdicion = document.getElementById('formEdicion');
+            
+            vistaPerfil.style.display = 'block';
+            formEdicion.style.display = 'none';
+        }
+
+        function guardarCambios() {
+            const nombres = document.getElementById('nombresEdit').value.trim();
+            const apellidos = document.getElementById('apellidosEdit').value.trim();
+            const correo = document.getElementById('correoEdit').value.trim();
+            const cargo = document.getElementById('cargoEdit').value;
+            const departamento = document.getElementById('departamentoEdit').value;
+            const telefono = document.getElementById('telefonoEdit').value.trim();
+            const direccion = document.getElementById('direccionEdit').value.trim();
+            
+            if (!nombres || !apellidos || !correo || !cargo || !departamento) {
+                alert('Por favor completa todos los campos requeridos');
+                return;
+            }
+            
+            const datos = {
+                nombres: nombres,
+                apellidos: apellidos,
+                correo: correo,
+                cargo: cargo,
+                departamento: departamento,
+                telefono: telefono,
+                direccion: direccion
+            };
+            
+            fetch('/sisnom/perfil', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(datos)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Actualizar vista con los nuevos datos
+                    const nombreCompleto = (nombres + ' ' + apellidos).trim();
+                    document.getElementById('userFullName').textContent = nombreCompleto;
+                    document.getElementById('nombreView').textContent = nombreCompleto;
+                    document.getElementById('cargoView').textContent = cargo;
+                    document.getElementById('departamentoView').textContent = departamento;
+                    
+                    // Actualizar avatar
+                    const inicial1 = nombres.charAt(0).toUpperCase();
+                    const inicial2 = apellidos.charAt(0).toUpperCase();
+                    document.getElementById('avatarInitial').textContent = inicial1 + inicial2;
+                    
+                    alert('Cambios guardados exitosamente');
+                    cancelarEdicion();
+                    
+                    // Recargar datos del perfil completos
+                    initializeProfile();
+                } else {
+                    alert('Error al guardar: ' + data.mensaje);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error de conexión al guardar');
+            });
+        }
+
+        function eliminarPerfil() {
+            const confirmacion1 = confirm('¿Estás seguro que deseas eliminar tu perfil?');
+            if (!confirmacion1) return;
+
+            const confirmacion2 = confirm('Esta acción es irreversible. ¿Deseas continuar?');
+            if (!confirmacion2) return;
+
+            fetch('/sisnom/perfil', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Perfil eliminado. Redirigiendo...');
+                    setTimeout(() => {
+                        window.location.href = '/sisnom/index.jsp';
+                    }, 1500);
+                } else {
+                    alert('Error al eliminar: ' + data.mensaje);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error de conexión al eliminar');
+            });
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar perfil con datos del usuario
+            initializeProfile();
+            
+            const btnActualizar = document.getElementById('btnActualizar');
+            const btnCancelar = document.getElementById('btnCancelar');
+            const btnGuardar = document.getElementById('btnGuardar');
+            const btnEliminar = document.getElementById('btnEliminar');
+            
+            if (btnActualizar) {
+                btnActualizar.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    toggleEditMode();
+                });
+            }
+            
+            if (btnCancelar) {
+                btnCancelar.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    cancelarEdicion();
+                });
+            }
+            
+            if (btnGuardar) {
+                btnGuardar.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    guardarCambios();
+                });
+            }
+
+            if (btnEliminar) {
+                btnEliminar.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    eliminarPerfil();
+                });
+            }
+        });
     </script>
 </body>
 </html>

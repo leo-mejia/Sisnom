@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS empleado (
     direccion VARCHAR(255),
     cargo VARCHAR(100),
     fecha_inicio DATE,
+    departamento VARCHAR(100),
     estado ENUM('activo', 'inactivo') DEFAULT 'activo',
     FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE
 );

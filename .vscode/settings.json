@@ -10,5 +10,6 @@
             "default": true
         }
     ],
-    "livePreview.defaultPreviewPath": "/sisnom/src/main/webapp/empleado/empleado.html"
+    "livePreview.defaultPreviewPath": "/sisnom/src/main/webapp/empleado/empleado.html",
+    "claudeCodeChat.permissions.yoloMode": false
 }
