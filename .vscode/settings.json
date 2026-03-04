@@ -9,5 +9,6 @@
             "path": "RUTA_AL_JDK_AQUI",
             "default": true
         }
-    ]
+    ],
+    "livePreview.defaultPreviewPath": "/sisnom/src/main/webapp/empleado/empleado.html"
 }

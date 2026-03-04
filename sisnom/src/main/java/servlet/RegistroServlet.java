@@ -1,14 +1,23 @@
 package servlet;
 
-import config.Conexion;
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import config.Conexion;
 
 @WebServlet("/registrar")
 public class RegistroServlet extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Connection con = null;
         try {
@@ -52,7 +61,7 @@ public class RegistroServlet extends HttpServlet {
             
             response.sendRedirect("index.jsp?registro=exitoso&usuarioCreado=" + userGenerado);
 
-        } catch (Exception e) {
+        } catch (IOException | SQLException e) {
             try { if(con != null) con.rollback(); } catch (SQLException ex) {}
             e.printStackTrace();
             response.getWriter().println("Error detallado: " + e.getMessage());
