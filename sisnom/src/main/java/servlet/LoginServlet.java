@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
             hayParams = true;
         }
         if (!hayParams) {
-            System.out.println("⚠️ ALERTA: No llegó NINGÚN dato. Revisa que tu <form> tenga method='POST'.");
+            System.out.println("⚠️ ALERTA: No llegó NINGÚN dato.");
         }
         System.out.println("=====================================");
 
@@ -43,11 +43,11 @@ public class LoginServlet extends HttpServlet {
         if (emailInput != null) {
             emailInput = emailInput.trim().toLowerCase();
         } else {
-            System.out.println("❌ ERROR CRÍTICO: 'email' es NULL. Verifica que en tu HTML el input sea <input name=\"email\" ...>");
+            System.out.println("❌ ERROR CRÍTICO: 'email' es NULL. ");
         }
         
         if (passwordInput == null) {
-            System.out.println("❌ ERROR CRÍTICO: 'password' es NULL. Verifica que en tu HTML el input sea <input name=\"password\" ...>");
+            System.out.println("❌ ERROR CRÍTICO: 'password' es NULL.");
         }
         
 
