@@ -156,7 +156,7 @@ public class PerfilServlet extends HttpServlet {
             }
             
             String sqlUpdate = "UPDATE empleado SET nombres = ?, apellidos = ?, correo_personal = ?, " +
-                              "telefono = ?, direccion = ?, cargo = ?, departamento = ? WHERE id_empleado = ?";
+                                "telefono = ?, direccion = ?, cargo = ?, departamento = ? WHERE id_empleado = ?";
             ps = con.prepareStatement(sqlUpdate);
             ps.setString(1, nombres);
             ps.setString(2, apellidos);
@@ -215,10 +215,10 @@ public class PerfilServlet extends HttpServlet {
         try {
             con = Conexion.getConnection();
             
-            // Primero obtener el id_empleado
+
             String sqlGetId = "SELECT e.id_empleado FROM empleado e " +
-                             "INNER JOIN usuario u ON e.id_usuario = u.id_usuario " +
-                             "WHERE u.correo = ?";
+                            "INNER JOIN usuario u ON e.id_usuario = u.id_usuario " +
+                            "WHERE u.correo = ?";
             ps = con.prepareStatement(sqlGetId);
             ps.setString(1, usuarioEmail);
             rs = ps.executeQuery();
@@ -233,7 +233,7 @@ public class PerfilServlet extends HttpServlet {
                 return;
             }
             
-            // Marcar empleado como inactivo (soft delete)
+
             String sqlUpdate = "UPDATE empleado SET estado = 'inactivo' WHERE id_empleado = ?";
             ps = con.prepareStatement(sqlUpdate);
             ps.setInt(1, idEmpleado);
@@ -241,7 +241,7 @@ public class PerfilServlet extends HttpServlet {
             int filasActualizadas = ps.executeUpdate();
             
             if (filasActualizadas > 0) {
-                // Invalidar sesión
+
                 session.invalidate();
                 
                 json.put("success", true);
