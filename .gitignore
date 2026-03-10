@@ -1,17 +1,24 @@
+# =========================
+# Node.js / npm
+# =========================
+node_modules/
+npm-debug.log*
 
-target/
-!.mvn/wrapper/maven-wrapper.jar
 
+# =========================
 # Logs
+# =========================
 *.log
 logs/
 
+# =========================
 # OS generated files
+# =========================
 .DS_Store
 Thumbs.db
 
 # =========================
-# IDE 
+# IDE
 # =========================
 .idea/
 *.iml
@@ -20,17 +27,10 @@ Thumbs.db
 .project
 .settings/
 
-
-
 # =========================
 # Environment
 # =========================
 .env
 .env.*
 *.local
-
-
-
-
-
 
