@@ -20,9 +20,11 @@ npm start
 El servidor estará disponible en `http://localhost:3000`
 
 ## Endpoints
+- `GET http://localhost:3000/health` - Servicio activo
+- `POST http://localhost:3000/api/auth/registro` - Registrar usuario
+- `POST http://localhost:3000/api/auth/login` - Iniciar sesión
 
-- `POST /api/auth/register` - Registrar usuario
-- `POST /api/auth/login` - Iniciar sesión
+
 
 ## Estructura
 
