@@ -1,9 +1,36 @@
-# Sisnom - Spring Boot
+# Sisnom - Sistema de Nómina Empresarial
 
-Proyecto Spring Boot 3.2 con JWT.
+Proyecto fullstack con backend Spring Boot 3.2 (JWT) y frontend ReactJS + Vite.
 
+## Estructura del Proyecto
 
-## Configuración
+```
+sisnom-springboot/
+├── client/                 # Frontend ReactJS + Vite
+│   ├── src/
+│   │   ├── components/    # Componentes reutilizables
+│   │   ├── context/        # Contextos de React (Auth)
+│   │   ├── pages/         # Páginas de la aplicación
+│   │   ├── services/      # Servicios API
+│   │   ├── App.jsx        # Componente principal
+│   │   └── main.jsx       # Punto de entrada
+│   ├── index.html
+│   └── package.json
+├── src/                    # Backend Spring Boot
+│   └── main/java/com/sisnom/
+│       ├── config/         # Configuración
+│       ├── controller/     # Controladores REST
+│       ├── dto/           # Objetos de transferencia
+│       ├── model/         # Entidades
+│       ├── repository/     # Repositorios
+│       ├── security/       # Seguridad JWT
+│       └── service/        # Servicios
+├── database/
+│   └── sisnom.sql          # Script de base de datos
+└── pom.xml                # Dependencias Maven
+```
+
+## Configuración del Backend (Spring Boot)
 
 Editar `src/main/resources/application.properties`:
 
@@ -14,19 +41,67 @@ spring.datasource.password=TU_PASSWORD
 app.jwt.secret=CAMBIAR_EN_PRODUCCION_SECRETO_LARGO
 ```
 
-## Cómo correr
+## Configuración del Frontend (ReactJS)
 
+El frontend está configurado para comunicarse con el backend en `http://localhost:8080`.
+
+### Variables de entorno
+
+Si necesitas cambiar la URL del API, editar `client/src/services/api.js`.
+
+## Cómo ejecutar el proyecto
+
+### Opción 1: Ejecutar por separado
+
+#### 1. Base de datos
 ```bash
-# 1. Crear la base de datos (usar el script original)
+# Crear la base de datos
 mysql -u root -p < database/sisnom.sql
+```
 
-# 2. Compilar y ejecutar
+#### 2. Backend (Spring Boot)
+```bash
+# Compilar y ejecutar
 mvn spring-boot:run
 
 # El servidor queda en: http://localhost:8080
 ```
 
-## Endpoints principales
+#### 3. Frontend (ReactJS)
+```bash
+# Ir al directorio client
+cd client
+
+# Instalar dependencias (solo la primera vez)
+npm install
+
+# Ejecutar en modo desarrollo
+npm run dev
+
+# El frontend queda en: http://localhost:5173
+```
+
+### Opción 2: Ejecutar con scripts npm (en client/)
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+## Rutas del Frontend
+
+| Ruta | Descripción |
+|------|-------------|
+| `/` | Login - Inicio de sesión |
+| `/register` | Registro de nuevos empleados |
+| `/recuperar` | Recuperación de contraseña |
+| `/admin` | Dashboard Administrador |
+| `/rrhh` | Dashboard Recursos Humanos |
+| `/contador` | Dashboard Contador |
+| `/empleado` | Dashboard Empleado |
+
+## Endpoints del Backend
 
 ### Autenticación (sin token)
 ```
@@ -38,13 +113,14 @@ POST /api/auth/registro
 Body: { nombres, apellidos, email, password, rol, tipoDoc, numeroDoc, cargo, departamento }
 ```
 
-### Con token (header: Authorization: Bearer <token>)
+### Endpoints autenticados (header: Authorization: Bearer <token>)
+
 ```
 GET    /api/perfil                  → Ver perfil propio
 POST   /api/perfil                  → Actualizar perfil
 DELETE /api/perfil                  → Desactivar cuenta
 
-GET    /api/empleados               → Listar (admin/rrhh/contador)
+GET    /api/empleados               → Listar empleados (admin/rrhh/contador)
 PUT    /api/empleados/{id}/estado   → Cambiar estado (admin/rrhh)
 
 GET    /api/solicitudes/mis-solicitudes
@@ -55,3 +131,30 @@ PUT    /api/solicitudes/{id}/estado (admin/rrhh)
 POST   /api/asistencia/entrada
 POST   /api/asistencia/salida/{id}
 GET    /api/asistencia/mi-asistencia
+```
+
+## Roles de usuario
+
+| Rol | Descripción |
+|-----|-------------|
+| `admin` | Administrador del sistema |
+| `recursos_humanos` | Gestor de RRHH |
+| `contador` | Área de contabilidad |
+| `empleado` | Empleado regular |
+
+## Tecnologías utilizadas
+
+### Backend
+- Spring Boot 3.2
+- Spring Security
+- JWT (JSON Web Tokens)
+- MySQL
+- Maven
+
+### Frontend
+- React 18
+- React Router DOM 6
+- Vite
+- CSS3
+
+
