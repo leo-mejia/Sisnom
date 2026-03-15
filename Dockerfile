@@ -14,6 +14,7 @@ RUN mvn clean package -DskipTests
 
 FROM eclipse-temurin:17-jre-jammy
 WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
+# Exact JAR name from pom.xml version 1.0.0
+COPY --from=build /app/target/sisnom-springboot-1.0.0.jar app.jar
 EXPOSE ${PORT:-8080}
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
