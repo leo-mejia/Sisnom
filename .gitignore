@@ -10,6 +10,11 @@ logs/
 .DS_Store
 Thumbs.db
 
+# Node artifacts
+node_modules/
+client/node_modules/
+client/dist/
+
 # =========================
 # IDE 
 # =========================

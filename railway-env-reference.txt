@@ -1,0 +1,15 @@
+SPRING_DATASOURCE_URL=jdbc:mysql://<MYSQLHOST>:<MYSQLPORT>/<MYSQLDATABASE>?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+SPRING_DATASOURCE_USERNAME=<MYSQLUSER>
+SPRING_DATASOURCE_PASSWORD=<MYSQLPASSWORD>
+JWT_SECRET=una-clave-JWT-larga-y-segura
+JWT_EXPIRATION=86400000
+CLIENT_URL=https://<APP>.railway.app
+# Railway expone `PORT` automáticamente y no debe sobrescribirse.
+
+# Comandos recomendados para el pipeline de Railway
+npm install --prefix client
+npm run build --prefix client
+mvn -DskipTests package
+
+# Comando de arranque
+java -jar target/sisnom-springboot-1.0.0.jar
