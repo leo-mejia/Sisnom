@@ -49,22 +49,35 @@ El frontend está configurado para comunicarse con el backend en `http://localho
 
 Si necesitas cambiar la URL del API, editar `client/src/services/api.js`.
 
-## Despliegue en Railway
+## Despliegue en Railway (Actualizado)
 
-1. Crea un proyecto en Railway y añade el addon de MySQL; luego ejecuta `railway run mysql --host $MYSQLHOST --port $MYSQLPORT --user $MYSQLUSER --password $MYSQLPASSWORD $MYSQLDATABASE < database/sisnom.sql` (o importa `database/sisnom.sql` desde un cliente).
-2. Copia las credenciales que te entrega Railway y completa las variables que aparecen en `railway-env-reference.txt` (`SPRING_DATASOURCE_*`, `JWT_SECRET`, `JWT_EXPIRATION`, `CLIENT_URL`). Railway expone el `PORT` automáticamente.
-3. En los ajustes del despliegue configura los pasos de build así:
-   ```
-   npm install --prefix client
-   npm run build --prefix client
-   mvn -DskipTests package
-   ```
-   Este orden genera la carpeta `client/dist` antes de empaquetar el backend y añade los activos dentro del `.jar`.
-4. El comando de arranque es:
-   ```
-   java -jar target/sisnom-springboot-1.0.0.jar
-   ```
-5. Railway puede usar el `Dockerfile` incluido para un despliegue basado en contenedor si prefieres controlar todo el proceso de compilación (multi-stage: construye el cliente con Node, copia los assets en `src/main/resources/static`, empaqueta el backend y deja disponibles los archivos compilados en `client/dist` para servirlos tanto desde la clase `WebConfig` como desde el sistema de ficheros).
+**Preparación DB:**
+1. En Railway dashboard, crea nuevo proyecto → New → Database → MySQL.
+2. Ve a Data tab del MySQL service → Connect → Copy vars: MYSQLHOST, MYSQLPORT, MYSQLDATABASE, MYSQLUSER, MYSQLPASSWORD.
+3. En Query tab, paste & run content of `database/sisnom.sql`.
+
+**Variables de entorno (Variables tab):**
+Use `railway-env-reference.txt` as guide:
+- SPRING_DATASOURCE_URL = `jdbc:mysql://${MYSQLHOST}:3306/${MYSQLDATABASE}?...` (or Railway auto-generates)
+- SPRING_DATASOURCE_USERNAME, PASSWORD
+- JWT_SECRET (generate strong 256+ bit key)
+- JWT_EXPIRATION=86400000 (24h)
+- CLIENT_URL = https://your-app-name.railway.app (your frontend URL)
+- PORT (auto by Railway)
+
+**Build & Deploy:**
+1. Connect GitHub repo to Railway service.
+2. railway.toml auto-configures startCommand.
+3. Build will run npm build client → mvn package (pom.xml copies dist to static).
+4. App serves frontend at / and API at /api/**.
+
+**Verify:**
+- Frontend at https://*.railway.app
+- CORS allows CLIENT_URL.
+- DB connected, auth works.
+
+Local test: `npm run build --prefix client && mvn clean package && java -jar target/*.jar`
+
 
 Al servir el frontend y el backend desde el mismo Spring Boot no es necesario cambiar la base (`API_BASE`) de `client/src/services/api.js`, pero `CLIENT_URL` se usa para limitar los orígenes permitidos en CORS cuando se prueban clientes externos.
 

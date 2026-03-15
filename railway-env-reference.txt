@@ -1,10 +1,21 @@
-SPRING_DATASOURCE_URL=jdbc:mysql://<MYSQLHOST>:<MYSQLPORT>/<MYSQLDATABASE>?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
-SPRING_DATASOURCE_USERNAME=<MYSQLUSER>
-SPRING_DATASOURCE_PASSWORD=<MYSQLPASSWORD>
-JWT_SECRET=una-clave-JWT-larga-y-segura
+SPRING_DATASOURCE_URL=jdbc:mysql://${MYSQLHOST:-mysql}:3306/${MYSQLDATABASE:-sisnom}?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&useUnicode=true
+SPRING_DATASOURCE_USERNAME=${MYSQLUSER}
+SPRING_DATASOURCE_PASSWORD=${MYSQLPASSWORD}
+JWT_SECRET=una-clave-JWT-larga-y-segura-minimo-256-bits
 JWT_EXPIRATION=86400000
-CLIENT_URL=https://<APP>.railway.app
-# Railway expone `PORT` automáticamente y no debe sobrescribirse.
+CLIENT_URL=https://your-app-name.railway.app  # Update with your Railway app domain
+PORT=  # Railway sets automatically
+
+# Railway MySQL plugin vars (auto-set):
+# MYSQLHOST, MYSQLPORT, MYSQLDATABASE, MYSQLUSER, MYSQLPASSWORD
+
+# Build commands for Railway:
+# npm install --prefix client
+# npm run build --prefix client
+# mvn -DskipTests package
+
+# Start command:
+# java -jar target/*.jar
 
 # Comandos recomendados para el pipeline de Railway
 npm install --prefix client

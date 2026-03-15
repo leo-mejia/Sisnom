@@ -28,9 +28,9 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource))
             .csrf(csrf -> csrf.disable())
             .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/login", "/api/auth/registro").permitAll()
-                .requestMatchers("/", "/index.html", "/**").permitAll()
+.authorizeHttpRequests(auth -> auth
+                .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/index.html", "/static/**", "/assets/**", "/favicon.ico", "/error", "/actuator/**").permitAll()
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

@@ -1,0 +1,12 @@
+[build]
+  builder = "nixpacks"
+
+[deploy]
+  startCommand = "java -jar target/sisnom-springboot-1.0.0.jar"
+
+# Build commands run before (from railway-env-reference.txt or auto)
+# Ensure npm build client before mvn
+
+[services.database]
+  type = "mysql:9"
+
