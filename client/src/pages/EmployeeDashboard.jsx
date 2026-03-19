@@ -128,8 +128,13 @@ const EmployeeDashboard = () => {
 
   const handleSubmitRequest = async (tipo) => {
     try {
+      const tipoMap = {
+        'vacaciones': 'vacaciones',
+        'permisos': 'permiso',
+        'incapacidad': 'incapacidad'
+      };
       const data = {
-        tipoSolicitud: tipo.toUpperCase(),
+        tipoSolicitud: tipoMap[tipo] || tipo,
         ...requestFormData
       };
       const result = await createRequest(data);
@@ -224,7 +229,7 @@ const EmployeeDashboard = () => {
           <h1>Panel de Control del Empleado</h1>
         </div>
 
-        {/* Profile Section */}
+        {/* INICIO - Perfil */}
         {activeSection === 'inicio' && (
           <div className="mb-8">
             <h2>Perfil Personal</h2>
@@ -241,16 +246,16 @@ const EmployeeDashboard = () => {
                       <p className="text-value">{profile?.apellidos || 'No especificado'}</p>
                     </div>
                     <div className="profile-item">
+                      <p className="text-label">Correo</p>
+                      <p className="text-value">{profile?.correo || 'No especificado'}</p>
+                    </div>
+                    <div className="profile-item">
                       <p className="text-label">Cargo</p>
                       <p className="text-value">{profile?.cargo || 'No especificado'}</p>
                     </div>
                     <div className="profile-item">
                       <p className="text-label">Departamento</p>
                       <p className="text-value">{profile?.departamento || 'No especificado'}</p>
-                    </div>
-                    <div className="profile-item">
-                      <p className="text-label">Correo</p>
-                      <p className="text-value">{profile?.correo || 'No especificado'}</p>
                     </div>
                     <div className="profile-item">
                       <p className="text-label">Teléfono</p>
@@ -260,14 +265,13 @@ const EmployeeDashboard = () => {
                       <p className="text-label">Dirección</p>
                       <p className="text-value">{profile?.direccion || 'No especificado'}</p>
                     </div>
-                    <div className="profile-item">
-                      <p className="text-label">Fecha de Ingreso</p>
-                      <p className="text-value">{profile?.fechaInicio || 'No especificada'}</p>
-                    </div>
                   </div>
                   <div className="mt-6">
                     <button className="btn btn-secondary" onClick={handleEdit}>
                       Actualizar Perfil
+                    </button>
+                    <button className="btn btn-danger ml-2" onClick={handleDelete}>
+                      Eliminar Perfil
                     </button>
                   </div>
                 </div>
@@ -327,12 +331,9 @@ const EmployeeDashboard = () => {
                         onChange={(e) => setEditData({...editData, cargo: e.target.value})}
                       >
                         <option value="">Seleccionar cargo</option>
-                        <option value="analista_nomina">Analista de Nómina</option>
-                        <option value="auxiliar_contable">Auxiliar Contable</option>
-                        <option value="gerente_rh">Gerente de Recursos Humanos</option>
-                        <option value="desarrollador">Desarrollador de Sistemas</option>
-                        <option value="contador_general">Contador General</option>
-                        <option value="secretaria">Secretario/a Ejecutivo/a</option>
+                        <option value="Empleado">Empleado</option>
+                        <option value="Analista Nómina">Analista Nómina</option>
+                        <option value="Contador">Contador</option>
                       </select>
                     </div>
                     <div className="profile-item">
@@ -343,12 +344,9 @@ const EmployeeDashboard = () => {
                         onChange={(e) => setEditData({...editData, departamento: e.target.value})}
                       >
                         <option value="">Seleccionar departamento</option>
-                        <option value="Recursos Humanos">Recursos Humanos</option>
+                        <option value="General">General</option>
+                        <option value="RRHH">Recursos Humanos</option>
                         <option value="Contabilidad">Contabilidad</option>
-                        <option value="Finanzas">Finanzas</option>
-                        <option value="Tecnologia">Tecnología</option>
-                        <option value="Operaciones">Operaciones</option>
-                        <option value="Marketing">Marketing</option>
                       </select>
                     </div>
                   </div>
@@ -359,9 +357,6 @@ const EmployeeDashboard = () => {
                     <button className="btn btn-secondary" onClick={handleCancel}>
                       Cancelar
                     </button>
-                    <button className="btn btn-danger" onClick={handleDelete}>
-                      Eliminar Perfil
-                    </button>
                   </div>
                 </div>
               )}
@@ -369,12 +364,10 @@ const EmployeeDashboard = () => {
           </div>
         )}
 
-        {/* Payroll Section */}
+        {/* NÓMINA */}
         {activeSection === 'nomina' && (
-          <div className="mb-8 nomina-section">
+          <div className="mb-8">
             <h2>Nómina</h2>
-            
-            {/* Desprendibles de Pago */}
             <div className="expandible-container">
               <div className="expandible-header" onClick={() => {
                 const content = document.getElementById('content-desprendibles');
@@ -382,7 +375,7 @@ const EmployeeDashboard = () => {
               }}>
                 <div className="expandible-header-content">
                   <p className="expandible-header-title">Desprendibles de Pago</p>
-                  <p className="expandible-header-desc">Consulta y descarga tus desprendibles de pago</p>
+                  <p className="expandible-header-desc">Descarga tus desprendibles mensuales</p>
                 </div>
                 <button className="btn btn-secondary btn-sm">Ver</button>
               </div>
@@ -393,8 +386,10 @@ const EmployeeDashboard = () => {
                     <p className="payslip-info-date">Fecha: 31/03/2026</p>
                   </div>
                   <div className="payslip-amount">
-                    <p className="payslip-amount-value">$3,250.00</p>
-                    <button className="btn btn-secondary payslip-button">Ver PDF</button>
+                    <p className="payslip-amount-value">$3,250,000</p>
+                    <button className="btn btn-secondary payslip-button" onClick={() => window.open('/api/nomina/pdf/marzo2026', '_blank')}>
+                      Descargar PDF
+                    </button>
                   </div>
                 </div>
                 <div className="payslip-item">
@@ -403,41 +398,29 @@ const EmployeeDashboard = () => {
                     <p className="payslip-info-date">Fecha: 28/02/2026</p>
                   </div>
                   <div className="payslip-amount">
-                    <p className="payslip-amount-value">$3,250.00</p>
-                    <button className="btn btn-secondary payslip-button">Ver PDF</button>
-                  </div>
-                </div>
-                <div className="payslip-item">
-                  <div className="payslip-info">
-                    <p className="payslip-info-title">Enero 2026</p>
-                    <p className="payslip-info-date">Fecha: 31/01/2026</p>
-                  </div>
-                  <div className="payslip-amount">
-                    <p className="payslip-amount-value">$3,250.00</p>
-                    <button className="btn btn-secondary payslip-button">Ver PDF</button>
+                    <p className="payslip-amount-value">$3,150,000</p>
+                    <button className="btn btn-secondary payslip-button">Descargar PDF</button>
                   </div>
                 </div>
               </div>
             </div>
-
-            {/* Historial de Pagos */}
             <div className="expandible-container">
               <div className="expandible-header" onClick={() => {
-                const content = document.getElementById('content-historial');
+                const content = document.getElementById('content-historial-pagos');
                 content.classList.toggle('show');
               }}>
                 <div className="expandible-header-content">
                   <p className="expandible-header-title">Historial de Pagos</p>
-                  <p className="expandible-header-desc">Revisa tu historial de pagos</p>
+                  <p className="expandible-header-desc">Tus pagos procesados</p>
                 </div>
                 <button className="btn btn-secondary btn-sm">Ver</button>
               </div>
-              <div id="content-historial" className="expandible-content">
+              <div id="content-historial-pagos" className="expandible-content">
                 <table className="table">
                   <thead>
                     <tr>
                       <th>Periodo</th>
-                      <th>Fecha</th>
+                      <th>Fecha Pago</th>
                       <th>Monto</th>
                       <th>Estado</th>
                     </tr>
@@ -445,20 +428,20 @@ const EmployeeDashboard = () => {
                   <tbody>
                     <tr>
                       <td>Marzo 2026</td>
-                      <td className="date">31/03/2026</td>
-                      <td className="amount">$3,250.00</td>
+                      <td>31/03/2026</td>
+                      <td>$3,250,000</td>
                       <td><span className="badge badge-success">Pagado</span></td>
                     </tr>
                     <tr>
                       <td>Febrero 2026</td>
-                      <td className="date">28/02/2026</td>
-                      <td className="amount">$3,250.00</td>
+                      <td>28/02/2026</td>
+                      <td>$3,150,000</td>
                       <td><span className="badge badge-success">Pagado</span></td>
                     </tr>
                     <tr>
                       <td>Enero 2026</td>
-                      <td className="date">31/01/2026</td>
-                      <td className="amount">$3,250.00</td>
+                      <td>31/01/2026</td>
+                      <td>$3,100,000</td>
                       <td><span className="badge badge-success">Pagado</span></td>
                     </tr>
                   </tbody>
@@ -468,7 +451,7 @@ const EmployeeDashboard = () => {
           </div>
         )}
 
-        {/* Requests Section */}
+        {/* SOLICITUDES */}
         {activeSection === 'solicitudes' && (
           <div className="mb-8">
             <h2>Solicitudes</h2>
@@ -480,14 +463,13 @@ const EmployeeDashboard = () => {
                   </div>
                   <div>
                     <p className="action-title">Vacaciones</p>
-                    <p className="action-desc">Solicita tus vacaciones</p>
+                    <p className="action-desc">Solicita días de vacaciones</p>
                   </div>
                 </div>
                 <button className="btn btn-secondary" onClick={() => setShowRequestForm('vacaciones')}>
-                  Solicitar
+                  Nueva Solicitud
                 </button>
               </div>
-
               <div className="action-item">
                 <div className="action-content">
                   <div className="icon-box">
@@ -495,14 +477,13 @@ const EmployeeDashboard = () => {
                   </div>
                   <div>
                     <p className="action-title">Permisos</p>
-                    <p className="action-desc">Solicita permisos</p>
+                    <p className="action-desc">Solicita permiso laboral</p>
                   </div>
                 </div>
                 <button className="btn btn-secondary" onClick={() => setShowRequestForm('permisos')}>
-                  Solicitar
+                  Nueva Solicitud
                 </button>
               </div>
-
               <div className="action-item">
                 <div className="action-content">
                   <div className="icon-box">
@@ -510,199 +491,269 @@ const EmployeeDashboard = () => {
                   </div>
                   <div>
                     <p className="action-title">Incapacidad</p>
-                    <p className="action-desc">Reporta tu incapacidad</p>
+                    <p className="action-desc">Reporta incapacidad médica</p>
                   </div>
                 </div>
                 <button className="btn btn-secondary" onClick={() => setShowRequestForm('incapacidad')}>
-                  Reportar
+                  Nueva Solicitud
                 </button>
               </div>
             </div>
 
             {showRequestForm && (
               <div className="card mt-6">
-                <h3>Solicitar {showRequestForm.charAt(0).toUpperCase() + showRequestForm.slice(1)}</h3>
-                <div className="form-group mt-6">
-                  <label>Fecha de Inicio</label>
+                <h3>Solicitud de {showRequestForm.charAt(0).toUpperCase() + showRequestForm.slice(1)}</h3>
+                <div className="form-group mt-4">
+                  <label>Fecha de Inicio *</label>
                   <input
                     type="date"
                     className="form-input"
                     onChange={(e) => setRequestFormData({...requestFormData, fechaInicio: e.target.value})}
                   />
                 </div>
-                <div className="form-group">
-                  <label>Fecha de Fin</label>
+                <div className="form-group mt-4">
+                  <label>Fecha de Fin *</label>
                   <input
                     type="date"
                     className="form-input"
                     onChange={(e) => setRequestFormData({...requestFormData, fechaFin: e.target.value})}
                   />
                 </div>
-                <div className="form-group">
-                  <label>Motivo</label>
+                <div className="form-group mt-4">
+                  <label>Motivo / Detalle *</label>
                   <textarea
                     className="form-input"
-                    rows="3"
+                    rows="4"
+                    placeholder="Explique el motivo de su solicitud..."
                     onChange={(e) => setRequestFormData({...requestFormData, motivo: e.target.value})}
                   ></textarea>
                 </div>
-                <div className="btn-group">
+                <div className="btn-group mt-6">
                   <button className="btn btn-primary" onClick={() => handleSubmitRequest(showRequestForm)}>
                     Enviar Solicitud
                   </button>
-                  <button className="btn btn-secondary" onClick={() => { setShowRequestForm(null); setRequestFormData({}); }}>
+                  <button className="btn btn-secondary" onClick={() => {
+                    setShowRequestForm(null);
+                    setRequestFormData({});
+                  }}>
                     Cancelar
                   </button>
                 </div>
               </div>
             )}
 
-            {requests.length > 0 && (
-              <div className="card mt-6">
-                <h3>Mis Solicitudes</h3>
-                <table className="table mt-6">
-                  <thead>
-                    <tr>
-                      <th>Tipo</th>
-                      <th>Fecha Inicio</th>
-                      <th>Fecha Fin</th>
-                      <th>Estado</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {requests.map((req) => (
-                      <tr key={req.id}>
-                        <td>{req.tipoSolicitud}</td>
-                        <td>{req.fechaInicio}</td>
-                        <td>{req.fechaFin}</td>
-                        <td>
-                          <span className={`badge ${req.estado === 'aprobada' ? 'badge-success' : req.estado === 'rechazada' ? 'badge-danger' : 'badge-warning'}`}>
-                            {req.estado}
-                          </span>
-                        </td>
+            <div className="card mt-8">
+              <h3>Mis Solicitudes</h3>
+              {requests.length === 0 ? (
+                <div className="text-center py-8">
+                  <svg className="mx-auto h-16 w-16 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                  </svg>
+                  <p className="mt-4 text-gray-500">No tienes solicitudes registradas</p>
+                </div>
+              ) : (
+                <div className="table-responsive">
+                  <table className="table w-full">
+                    <thead>
+                      <tr>
+                        <th>Tipo</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Fin</th>
+                        <th>Motivo</th>
+                        <th>Estado</th>
+                        <th>Fecha Creada</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
+                    </thead>
+                    <tbody>
+                      {requests.map((req) => (
+                        <tr key={req.id} className="hover:bg-gray-50">
+                          <td className="font-medium capitalize">{req.tipoSolicitud || 'Solicitud'}</td>
+                          <td>{req.fechaInicio || '-'}</td>
+                          <td>{req.fechaFin || '-'}</td>
+                          <td className="max-w-xs truncate">{req.motivo || '-'}</td>
+                          <td>
+                            <span className={`badge px-3 py-1 rounded-full text-xs font-medium ${
+                              req.estado === 'aprobada' ? 'bg-green-100 text-green-800' :
+                              req.estado === 'rechazada' ? 'bg-red-100 text-red-800' :
+                              req.estado === 'pendiente' ? 'bg-yellow-100 text-yellow-800' :
+                              'bg-blue-100 text-blue-800'
+                            }`}>
+                              {req.estado || 'pendiente'}
+                            </span>
+                          </td>
+                          <td>{req.fechaCreacion || '-'}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
           </div>
         )}
 
-        {/* Attendance Section */}
+        {/* ASISTENCIA */}
         {activeSection === 'asistencia' && (
-          <div className="mb-8 asistencia-section">
+          <div className="mb-8">
             <h2>Asistencia</h2>
-            <div className="expandible-container">
-              <div className="expandible-header" onClick={() => {
-                const content = document.getElementById('content-registro-asistencia');
-                content.classList.toggle('show');
-              }}>
-                <div className="expandible-header-content">
-                  <p className="expandible-header-title">Registro de Asistencia</p>
-                  <p className="expandible-header-desc">Registra tu entrada y salida</p>
-                </div>
-                <button className="btn btn-secondary btn-sm">Ver</button>
-              </div>
-              <div id="content-registro-asistencia" className="expandible-content">
-                <div className="asistencia-action">
-                  <p className="asistencia-action-title">Estado de asistencia</p>
-                  <p className="asistencia-action-desc">Registra tu entrada o salida del día</p>
-                  <button className="btn btn-primary" onClick={handleRegisterAttendance}>
-                    Registrar Entrada/Salida
-                  </button>
-                </div>
+            <div className="card mb-6">
+              <h3>Registro de Asistencia</h3>
+              <div className="asistencia-action">
+                <p>Hoy no has registrado asistencia</p>
+                <button className="btn btn-primary" onClick={handleRegisterAttendance}>
+                  Registrar Entrada
+                </button>
               </div>
             </div>
-
-            <div className="expandible-container">
-              <div className="expandible-header" onClick={() => {
-                const content = document.getElementById('content-historial-asistencia');
-                content.classList.toggle('show');
-              }}>
-                <div className="expandible-header-content">
-                  <p className="expandible-header-title">Historial de Asistencia</p>
-                  <p className="expandible-header-desc">Revisa tu historial de entrada y salida</p>
+            <div className="card">
+              <h3>Historial de Asistencia</h3>
+              {attendance.length === 0 ? (
+                <div className="text-center py-8">
+                  <p className="text-gray-500">No hay registros de asistencia</p>
                 </div>
-                <button className="btn btn-secondary btn-sm">Ver</button>
-              </div>
-              <div id="content-historial-asistencia" className="expandible-content">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Fecha</th>
-                      <th>Hora Entrada</th>
-                      <th>Hora Salida</th>
-                      <th>Estado</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {attendance.length > 0 ? (
-                      attendance.map((a) => (
-                        <tr key={a.id}>
-                          <td>{a.fecha}</td>
+              ) : (
+                <div className="table-responsive">
+                  <table className="table w-full">
+                    <thead>
+                      <tr>
+                        <th>Fecha</th>
+                        <th>Hora Entrada</th>
+                        <th>Hora Salida</th>
+                        <th>Estado</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {attendance.map((a) => (
+                        <tr key={a.id} className="hover:bg-gray-50">
+                          <td className="font-medium">{a.fecha}</td>
                           <td>{a.horaEntrada || '-'}</td>
                           <td>{a.horaSalida || '-'}</td>
                           <td>
-                            <span className="badge badge-success">{a.estado || 'presente'}</span>
+                            <span className={`badge px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800`}>
+                              Presente
+                            </span>
                           </td>
                         </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan="4" className="text-center">No hay registros</td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
-              </div>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
             </div>
           </div>
         )}
 
-        {/* Notifications Section */}
+        {/* NOTIFICACIONES */}
         {activeSection === 'notificaciones' && (
           <div className="mb-8">
             <h2>Notificaciones</h2>
             <div className="notification-list">
               <div className="notification-item">
-                <div className="notification-icon">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256"><path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34Z"></path></svg>
+                <div className="notification-icon bg-blue-100 text-blue-600 p-2 rounded-full">
+                  <svg width="20" height="20" className="text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" clipRule="evenodd" />
+                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118zm-8 8V11a1 1 0 00-.707-.707L8 10.586l-.293.207A1 1 0 007 11v6a1 1 0 001 1h2a1 1 0 001-1z" clipRule="evenodd" />
+                  </svg>
                 </div>
                 <div className="notification-content">
-                  <p className="notification-title">Pago procesado</p>
-                  <p className="notification-desc">Tu pago ha sido procesado exitosamente.</p>
+                  <p className="notification-title">Nuevo pago procesado</p>
+                  <p className="notification-desc">Tu pago de Marzo ha sido depositado</p>
                   <p className="notification-time">Hace 2 horas</p>
+                </div>
+              </div>
+              <div className="notification-item">
+                <div className="notification-icon bg-green-100 text-green-600 p-2 rounded-full">
+                  <svg width="20" height="20" className="text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                  </svg>
+                </div>
+                <div className="notification-content">
+                  <p className="notification-title">Solicitud aprobada</p>
+                  <p className="notification-desc">Tu permiso del 20/03 ha sido aprobado</p>
+                  <p className="notification-time">Hace 1 día</p>
+                </div>
+              </div>
+              <div className="notification-item read">
+                <div className="notification-icon bg-gray-100 text-gray-600 p-2 rounded-full">
+                  <svg width="20" height="20" className="text-gray-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                  </svg>
+                </div>
+                <div className="notification-content">
+                  <p className="notification-title">Recordatorio asistencia</p>
+                  <p className="notification-desc">No has registrado tu entrada hoy</p>
+                  <p className="notification-time">Hace 4 horas</p>
                 </div>
               </div>
             </div>
           </div>
         )}
 
-        {/* Help Section */}
+        {/* AYUDA */}
         {activeSection === 'ayuda' && (
           <div className="mb-8">
             <h2>Ayuda y Soporte</h2>
-            <div className="action-list">
-              <div className="action-item">
-                <div className="action-content">
-                  <div className="icon-box">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256"><path d="M140,180a12,12,0,1,1-12-12A12,12,0,0,1,140,180ZM128,72c-22.06,0-40,16.15-40,36v4a8,8,0,0,0,16,0v-4c0-11,10.77-20,24-20s24,9,24,20-10.77,20-24,20a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0v-.72c18.24-3.35,32-17.9,32-35.28C168,88.15,150.06,72,128,72Zm104,56A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"></path></svg>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="card">
+                <h3>Información de Contacto</h3>
+                <div className="svg mt-6 space-y-4">  
+                  <div className="svg2 flex items-center"> 
+                    <div className="bg-blue-100 p-2 rounded-lg mr-4">
+                      <svg width="100px" height="100px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6zm3.519 0L12 11.671 18.481 6H5.52zM20 7.329l-7.341 6.424a1 1 0 0 1-1.318 0L4 7.329V18h16V7.329z" fill="#0D0D0D"/></svg>
+                    </div>
+                    <div>
+                      <p className="font-medium">Soporte Técnico</p>
+                      <p>soporte@sisnom.com</p>
+                      <p>+57 300 123 4567</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="action-title">FAQ</p>
-                    <p className="action-desc">Preguntas frecuentes</p>
+                  <div className="flex items-center">
+                    <div className="bg-green-100 p-2 rounded-lg mr-4">
+                      <svg fill="#000000" width="100px" height="100px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.44,13c-.22,0-.45-.07-.67-.12a9.44,9.44,0,0,1-1.31-.39,2,2,0,0,0-2.48,1l-.22.45a12.18,12.18,0,0,1-2.66-2,12.18,12.18,0,0,1-2-2.66L10.52,9a2,2,0,0,0,1-2.48,10.33,10.33,0,0,1-.39-1.31c-.05-.22-.09-.45-.12-.68a3,3,0,0,0-3-2.49h-3a3,3,0,0,0-3,3.41A19,19,0,0,0,18.53,21.91l.38,0a3,3,0,0,0,2-.76,3,3,0,0,0,1-2.25v-3A3,3,0,0,0,19.44,13Zm.5,6a1,1,0,0,1-.34.75,1.05,1.05,0,0,1-.82.25A17,17,0,0,1,4.07,5.22a1.09,1.09,0,0,1,.25-.82,1,1,0,0,1,.75-.34h3a1,1,0,0,1,1,.79q.06.41.15.81a11.12,11.12,0,0,0,.46,1.55l-1.4.65a1,1,0,0,0-.49,1.33,14.49,14.49,0,0,0,7,7,1,1,0,0,0,.76,0,1,1,0,0,0,.57-.52l.62-1.4a13.69,13.69,0,0,0,1.58.46q.4.09.81.15a1,1,0,0,1,.79,1Z"/></svg>
+                    </div>
+                    <div>
+                      <p className="font-medium">Recursos Humanos</p>
+                      <p>rrhh@sisnom.com</p>
+                      <p>+57 300 987 6543</p>
+                    </div>
                   </div>
                 </div>
-                <button className="btn btn-secondary">Ver</button>
+              </div>
+              <div className="card">
+                <h3>Enviar Solicitud de Soporte</h3>
+                <div className="mt-6 space-y-4">
+                  <div className="form-group">
+                    <label>Asunto</label>
+                    <input type="text" className="form-input" placeholder="Describe tu problema" />
+                  </div>
+                  <div className="form-group">
+                    <label>Detalle</label>
+                    <textarea className="form-input" rows="4" placeholder="Explica el problema en detalle..."></textarea>
+                  </div>
+                  <div className="btn-group">
+                    <button className="btn btn-primary">Enviar Solicitud</button>
+                    <button className="btn btn-secondary">Cancelar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="mt-8 card">
+              <h3>Preguntas Frecuentes</h3>
+              <div className="faq-item">
+                <h4>¿Cómo registro mi asistencia?</h4>
+                <p>Ve a la sección Asistencia y haz clic en "Registrar Entrada"</p>
+              </div>
+              <div className="faq-item">
+                <h4>¿Cómo veo mi desprendible?</h4>
+                <p>En Nómina haz clic en "Ver PDF" del mes correspondiente</p>
               </div>
             </div>
           </div>
         )}
+
       </main>
     </div>
   );
 };
 
 export default EmployeeDashboard;
-

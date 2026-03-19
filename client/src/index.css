@@ -123,9 +123,31 @@ body {
   color: #fff;
 }
 
-.nav-item svg {
+.nav-item div {
   width: 20px;
   height: 20px;
+}
+.icon-small {
+  width: 20px !important;
+  height: 20px !important;
+  display: inline-block;
+}
+
+.nav-item svg,
+.contact-icon svg {
+  width: 18px !important;
+  height: 18px !important;
+  flex-shrink: 0;
+}
+.svg {
+  display:flex;
+}
+.svg2{
+  margin-right:100px;
+}
+
+.contact-icon {
+  padding: 0.5rem !important;
 }
 
 /* Content */
@@ -163,14 +185,19 @@ body {
 }
 
 .card-icon {
-  width: 48px;
-  height: 48px;
+  width: 36px;
+  height: 36px;
   border-radius: 8px;
   background-color: #f5f5f5;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #000;
+}
+
+.card-icon svg {
+  width: 24px !important;
+  height: 24px !important;
 }
 
 .card-title {
@@ -544,8 +571,8 @@ body {
 }
 
 .notification-icon {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background-color: #f5f5f5;
   display: flex;
@@ -553,6 +580,11 @@ body {
   justify-content: center;
   color: #000;
   flex-shrink: 0;
+}
+
+.notification-icon svg {
+  width: 24px !important;
+  height: 24px !important;
 }
 
 .notification-content {
@@ -599,14 +631,19 @@ body {
 }
 
 .icon-box {
-  width: 48px;
-  height: 48px;
+  width: 36px;
+  height: 36px;
   border-radius: 8px;
   background-color: #f5f5f5;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #000;
+}
+
+.icon-box svg {
+  width: 24px !important;
+  height: 24px !important;
 }
 
 .action-title {

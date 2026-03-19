@@ -30,7 +30,7 @@ const authenticatedFetch = async (url, options = {}) => {
   return response;
 };
 
-// Auth API
+// Auth API (public)
 export const login = async (email, password) => {
   const response = await fetch(`${API_BASE}/auth/login`, {
     method: 'POST',
@@ -148,7 +148,6 @@ export const updateRequestStatus = async (id, estado) => {
   return response.json();
 };
 
-// Logout helper - clears local storage and redirects
 export const logout = () => {
   localStorage.removeItem('token');
   localStorage.removeItem('rol');
