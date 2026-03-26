@@ -73,9 +73,16 @@ export const deleteProfile = async () => {
 
 // Employee API
 export const getEmployees = async () => {
+  console.log('Fetching employees...');
   const response = await authenticatedFetch('/empleados');
-  if (!response) return [];
-  return response.json();
+  if (!response) {
+    console.error('No response from server');
+    return [];
+  }
+  console.log('Employees response status:', response.status);
+  const data = await response.json();
+  console.log('Employees data:', data);
+  return data;
 };
 
 export const getEmployee = async (id) => {

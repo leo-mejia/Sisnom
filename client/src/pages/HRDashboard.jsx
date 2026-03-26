@@ -16,14 +16,17 @@ const HRDashboard = () => {
 
   const loadData = async () => {
     try {
+      console.log('Loading HR data...');
       const [empData, reqData] = await Promise.all([
         getEmployees(),
         getPendingRequests()
       ]);
       setEmployees(empData || []);
       setPendingRequests(reqData || []);
+      console.log('Loaded employees:', empData?.length || 0);
     } catch (error) {
-      console.error('Error loading data:', error);
+      console.error('Error loading HR data:', error);
+      alert('Error cargando datos: ' + error.message);
     } finally {
       setLoading(false);
     }
@@ -205,6 +208,7 @@ const HRDashboard = () => {
                 <table className="table">
                   <thead>
                     <tr>
+                      <th>Usuario</th>
                       <th>Tipo</th>
                       <th>Fecha Inicio</th>
                       <th>Fecha Fin</th>
@@ -215,6 +219,13 @@ const HRDashboard = () => {
                   <tbody>
                     {pendingRequests.map((req) => (
                       <tr key={req.id}>
+                         {req.usuarioNombre ||
+                    req.nombreUsuario ||
+                    req.empleadoNombre ||
+                    req.usuario?.nombre ||
+                    `${req.usuario?.nombres || ''} ${req.usuario?.apellidos || ''}`.trim() ||
+                    `${req.nombres || ''} ${req.apellidos || ''}`.trim() ||
+                    'Usuario no disponible'}
                         <td>{req.tipoSolicitud}</td>
                         <td>{req.fechaInicio}</td>
                         <td>{req.fechaFin}</td>

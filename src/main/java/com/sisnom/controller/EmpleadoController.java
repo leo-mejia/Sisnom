@@ -18,7 +18,7 @@ public class EmpleadoController {
 
     // GET /api/empleados
     @GetMapping
-    @PreAuthorize("hasAnyRole('ADMIN', 'RECURSOS_HUMANOS', 'CONTADOR')")
+@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_RECURSOS_HUMANOS', 'ROLE_CONTADOR')")
     public ResponseEntity<List<Empleado>> listarEmpleados() {
         return ResponseEntity.ok(empleadoRepository.findAll());
     }

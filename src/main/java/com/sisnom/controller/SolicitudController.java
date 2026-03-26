@@ -49,10 +49,24 @@ public class SolicitudController {
     }
 
     // GET 
-    @GetMapping("/pendientes")
+@GetMapping("/pendientes")
     @PreAuthorize("hasAnyRole('ADMIN', 'RECURSOS_HUMANOS')")
     public ResponseEntity<?> pendientes() {
-        return ResponseEntity.ok(solicitudRepository.findByEstado(Solicitud.Estado.pendiente));
+        List<Solicitud> solicitudes = solicitudRepository.findByEstado(Solicitud.Estado.pendiente);
+        List<Map<String, Object>> result = solicitudes.stream().map(sol -> {
+            String nombreUsuario = sol.getEmpleado().getNombres() + " " + sol.getEmpleado().getApellidos();
+            Map<String, Object> map = Map.of(
+                "id", sol.getIdSolicitud(),
+                "tipoSolicitud", sol.getTipoSolicitud().name(),
+                "fechaInicio", sol.getFechaInicio().toString(),
+                "fechaFin", sol.getFechaFin().toString(),
+                "motivo", sol.getMotivo(),
+                "estado", sol.getEstado().name(),
+                "nombreUsuario", nombreUsuario
+            );
+            return map;
+        }).toList();
+        return ResponseEntity.ok(result);
     }
 
     // PUT 

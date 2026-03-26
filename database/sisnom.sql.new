@@ -1,0 +1,34 @@
+CREATE DATABASE IF NOT EXISTS sisnom;
+USE sisnom;
+
+CREATE TABLE IF NOT EXISTS usuario (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_usuario VARCHAR(100) NOT NULL UNIQUE,
+    correo VARCHAR(100) NOT NULL UNIQUE,       
+    contraseña VARCHAR(255) NOT NULL,
+    rol ENUM('admin', 'empleado', 'contador', 'recursos_humanos') NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- [ALL other CREATE TABLEs unchanged...]
+
+-- Sample data added at end
+INSERT INTO usuario (nombre_usuario, correo, contraseña, rol) VALUES 
+('admin', 'admin@sisnom.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin'), -- pw=123456
+('rh', 'rh@sisnom.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'recursos_humanos'),
+('emp1', 'emp1@sisnom.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'empleado'),
+('emp2', 'emp2@sisnom.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'empleado'),
+('emp3', 'emp3@sisnom.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'empleado');
+
+INSERT INTO empleado (id_usuario, nombres, apellidos, tipo_documento, numero_documento, cargo, departamento, estado) VALUES 
+(3, 'Juan', 'Pérez', 'CC', '10001234', 'Desarrollador', 'TI', 'activo'),
+(4, 'María', 'García', 'CC', '10005678', 'Analista', 'Finanzas', 'activo'),
+(5, 'Carlos', 'López', 'CC', '10009876', 'Diseñador', 'Marketing', 'activo'),
+(2, 'Ana', 'Rodríguez', 'CC', '10011223', 'Gerente RRHH', 'Recursos Humanos', 'activo'),
+(1, 'Pedro', 'Gómez', 'CC', '10014567', 'Director', 'Dirección', 'activo');
+
+INSERT INTO solicitud (id_empleado, tipo_solicitud, fecha_inicio, fecha_fin, motivo, estado) VALUES 
+(1, 'vacaciones', '2024-04-01', '2024-04-05', 'Vacaciones anuales', 'pendiente'),
+(2, 'permiso', '2024-03-28', '2024-03-28', 'Cita médica', 'pendiente'),
+(3, 'incapacidad', '2024-03-25', '2024-03-30', 'Gripe', 'pendiente');
+
