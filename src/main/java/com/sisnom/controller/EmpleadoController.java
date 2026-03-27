@@ -14,24 +14,20 @@ import java.util.Map;
 @RequestMapping("/api/empleados")
 public class EmpleadoController {
 
-    @Autowired private EmpleadoRepository empleadoRepository;
-
-    // GET /api/empleados
     @GetMapping
-@PreAuthorize("hasAnyRole('ADMIN', 'RECURSOS_HUMANOS', 'CONTADOR')")
+    @PreAuthorize("hasAnyAuthority('admin', 'recursos_humanos', 'contador', 'ADMIN', 'CONTADOR')")
     public ResponseEntity<List<Empleado>> listarEmpleados() {
         return ResponseEntity.ok(empleadoRepository.findAll());
     }
 
-    // GET /api/empleados/{id}
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN', 'RECURSOS_HUMANOS')")
+    @PreAuthorize("hasAnyAuthority('admin', 'recursos_humanos', 'ADMIN')")
     public ResponseEntity<?> getEmpleado(@PathVariable Integer id) {
         return empleadoRepository.findById(id)
                 .map(emp -> ResponseEntity.ok((Object) emp))
                 .orElse(ResponseEntity.notFound().build());
     }
-
+}
     // PUT /api/empleados/{id}/estado  → Body: { "estado": "activo" | "inactivo" }
     @PutMapping("/{id}/estado")
     @PreAuthorize("hasAnyRole('ADMIN', 'RECURSOS_HUMANOS')")
