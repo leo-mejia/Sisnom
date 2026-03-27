@@ -14,6 +14,9 @@ import java.util.Map;
 @RequestMapping("/api/empleados")
 public class EmpleadoController {
 
+    @Autowired 
+    private EmpleadoRepository empleadoRepository; // <-- Faltaba esto
+
     @GetMapping
     @PreAuthorize("hasAnyAuthority('admin', 'recursos_humanos', 'contador', 'ADMIN', 'CONTADOR')")
     public ResponseEntity<List<Empleado>> listarEmpleados() {
@@ -21,18 +24,16 @@ public class EmpleadoController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('admin', 'recursos_humanos', 'ADMIN')")
+    @PreAuthorize("hasAnyAuthority('admin', 'recursos_humanos', 'ADMIN', 'RECURSOS_HUMANOS')")
     public ResponseEntity<?> getEmpleado(@PathVariable Integer id) {
         return empleadoRepository.findById(id)
                 .map(emp -> ResponseEntity.ok((Object) emp))
                 .orElse(ResponseEntity.notFound().build());
     }
-}
-    // PUT /api/empleados/{id}/estado  → Body: { "estado": "activo" | "inactivo" }
+
     @PutMapping("/{id}/estado")
-    @PreAuthorize("hasAnyRole('ADMIN', 'RECURSOS_HUMANOS')")
-    public ResponseEntity<?> cambiarEstado(@PathVariable Integer id,
-                                           @RequestBody Map<String, String> body) {
+    @PreAuthorize("hasAnyAuthority('admin', 'recursos_humanos', 'ADMIN', 'RECURSOS_HUMANOS')")
+    public ResponseEntity<?> cambiarEstado(@PathVariable Integer id, @RequestBody Map<String, String> body) {
         return empleadoRepository.findById(id).map(emp -> {
             emp.setEstado(Empleado.Estado.valueOf(body.get("estado")));
             empleadoRepository.save(emp);
