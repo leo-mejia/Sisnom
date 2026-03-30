@@ -21,7 +21,7 @@ public class AsistenciaController {
     @Autowired private UsuarioRepository usuarioRepository;
     @Autowired private EmpleadoRepository empleadoRepository;
 
-    // POST /api/asistencia/entrada
+    // POST /api/asistencia/entrada  — cualquier usuario autenticado
     @PostMapping("/entrada")
     public ResponseEntity<?> registrarEntrada(@AuthenticationPrincipal UserDetails user) {
         Empleado empleado = getEmpleado(user.getUsername());
@@ -29,11 +29,16 @@ public class AsistenciaController {
         asistencia.setEmpleado(empleado);
         asistencia.setFecha(LocalDate.now());
         asistencia.setHoraEntrada(LocalTime.now());
-        asistenciaRepository.save(asistencia);
-        return ResponseEntity.ok(Map.of("success", true, "mensaje", "Entrada registrada"));
+        Asistencia saved = asistenciaRepository.save(asistencia);
+        // Devolvemos el id para poder registrar la salida después
+        return ResponseEntity.ok(Map.of(
+            "success", true,
+            "mensaje", "Entrada registrada",
+            "id", saved.getIdAsistencia()
+        ));
     }
 
-    // POST /api/asistencia/salida/{id}
+    // POST /api/asistencia/salida/{id}  — cualquier usuario autenticado
     @PostMapping("/salida/{id}")
     public ResponseEntity<?> registrarSalida(@PathVariable Integer id) {
         return asistenciaRepository.findById(id).map(a -> {
@@ -43,16 +48,16 @@ public class AsistenciaController {
         }).orElse(ResponseEntity.notFound().build());
     }
 
-    // GET /api/asistencia/mi-asistencia
+    // GET /api/asistencia/mi-asistencia  — cualquier usuario autenticado
     @GetMapping("/mi-asistencia")
     public ResponseEntity<?> miAsistencia(@AuthenticationPrincipal UserDetails user) {
         Empleado empleado = getEmpleado(user.getUsername());
         return ResponseEntity.ok(asistenciaRepository.findByEmpleado(empleado));
     }
 
-    // GET /api/asistencia/empleado/{id}
+    // GET /api/asistencia/empleado/{id}  — solo admin o recursos_humanos
     @GetMapping("/empleado/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN', 'RECURSOS_HUMANOS')")
+    @PreAuthorize("hasAnyAuthority('admin', 'recursos_humanos')")
     public ResponseEntity<?> asistenciaEmpleado(@PathVariable Integer id) {
         return empleadoRepository.findById(id)
                 .map(emp -> ResponseEntity.ok((Object) asistenciaRepository.findByEmpleado(emp)))
