@@ -21,16 +21,15 @@ public class SolicitudController {
     @Autowired private UsuarioRepository usuarioRepository;
     @Autowired private EmpleadoRepository empleadoRepository;
 
-    // GET 
+    // GET /api/solicitudes/mis-solicitudes  — cualquier usuario autenticado
     @GetMapping("/mis-solicitudes")
     public ResponseEntity<?> misSolicitudes(@AuthenticationPrincipal UserDetails user) {
         Usuario usuario = usuarioRepository.findByCorreo(user.getUsername()).orElseThrow();
         Empleado empleado = empleadoRepository.findByUsuario(usuario).orElseThrow();
-        List<Solicitud> lista = solicitudRepository.findByEmpleado(empleado);
-        return ResponseEntity.ok(lista);
+        return ResponseEntity.ok(solicitudRepository.findByEmpleado(empleado));
     }
 
-    // POST
+    // POST /api/solicitudes  — cualquier usuario autenticado
     @PostMapping
     public ResponseEntity<?> crearSolicitud(@AuthenticationPrincipal UserDetails user,
                                              @RequestBody Map<String, String> body) {
@@ -48,30 +47,26 @@ public class SolicitudController {
         return ResponseEntity.ok(Map.of("success", true, "mensaje", "Solicitud enviada"));
     }
 
-    // GET 
-@GetMapping("/pendientes")
-    @PreAuthorize("hasAnyRole('ADMIN', 'RECURSOS_HUMANOS')")
+    // GET /api/solicitudes/pendientes  — solo admin o recursos_humanos
+    @GetMapping("/pendientes")
+    @PreAuthorize("hasAnyAuthority('admin', 'recursos_humanos')")
     public ResponseEntity<?> pendientes() {
         List<Solicitud> solicitudes = solicitudRepository.findByEstado(Solicitud.Estado.pendiente);
-        List<Map<String, Object>> result = solicitudes.stream().map(sol -> {
-            String nombreUsuario = sol.getEmpleado().getNombres() + " " + sol.getEmpleado().getApellidos();
-            Map<String, Object> map = Map.of(
-                "id", sol.getIdSolicitud(),
-                "tipoSolicitud", sol.getTipoSolicitud().name(),
-                "fechaInicio", sol.getFechaInicio().toString(),
-                "fechaFin", sol.getFechaFin().toString(),
-                "motivo", sol.getMotivo(),
-                "estado", sol.getEstado().name(),
-                "nombreUsuario", nombreUsuario
-            );
-            return map;
-        }).toList();
+        List<Map<String, Object>> result = solicitudes.stream().map(sol -> Map.<String, Object>of(
+            "id",             sol.getIdSolicitud(),
+            "tipoSolicitud",  sol.getTipoSolicitud().name(),
+            "fechaInicio",    sol.getFechaInicio().toString(),
+            "fechaFin",       sol.getFechaFin().toString(),
+            "motivo",         sol.getMotivo() != null ? sol.getMotivo() : "",
+            "estado",         sol.getEstado().name(),
+            "nombreUsuario",  sol.getEmpleado().getNombres() + " " + sol.getEmpleado().getApellidos()
+        )).toList();
         return ResponseEntity.ok(result);
     }
 
-    // PUT 
+    // PUT /api/solicitudes/{id}/estado  — solo admin o recursos_humanos
     @PutMapping("/{id}/estado")
-    @PreAuthorize("hasAnyRole('ADMIN', 'RECURSOS_HUMANOS')")
+    @PreAuthorize("hasAnyAuthority('admin', 'recursos_humanos')")
     public ResponseEntity<?> actualizarEstado(@PathVariable Integer id,
                                                @RequestBody Map<String, String> body) {
         return solicitudRepository.findById(id).map(sol -> {
