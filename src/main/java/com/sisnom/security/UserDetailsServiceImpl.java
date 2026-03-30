@@ -20,10 +20,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Usuario usuario = usuarioRepository.findByCorreo(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + email));
 
+        // Asignamos el rol SIN prefijo ROLE_ para usar hasAuthority() en los controllers
+        // Ejemplo: rol en BD = "recursos_humanos" → authority = "recursos_humanos"
         return new User(
                 usuario.getCorreo(),
                 usuario.getContrasena(),
-                List.of(new SimpleGrantedAuthority("ROLE_" + usuario.getRol().name().toUpperCase()))
+                List.of(new SimpleGrantedAuthority(usuario.getRol().name()))
         );
     }
 }
